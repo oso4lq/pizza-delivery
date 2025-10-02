@@ -1,4 +1,4 @@
-// frontend/src/app/shared/_ui/button/button.component.scss
+// button.component.scss
 
 @use './src/globalStyles.scss' as *;
 
@@ -11,8 +11,7 @@
   align-items: center;
   justify-content: center;
   max-width: 300px;
-  // padding: 8px 16px;
-  padding: 6px 12px;
+  padding: 8px 16px;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -79,12 +78,66 @@
       @include coloring-raised-button($white-color, $primary-color, $primary-color);
     }
 
+    &.orange {
+      @include coloring-raised-button($orange-color, $work-time-vacation-color, $work-time-vacation-color);
+    }
+
+    &.grey {
+      @include coloring-raised-button($text-body, $icon-border-secondary, $icon-border-secondary);
+    }
+
+    &.red {
+      @include coloring-raised-button($red-color, $work-time-sick-color, $work-time-sick-color);
+    }
+
+    &.secondary {
+      @include coloring-raised-button($text-secondary, $btn-tertiary, $btn-tertiary);
+    }
+
     &.danger {
-      @include coloring-raised-button($warn-color, $pink-color, $pink-color);
+      @include coloring-raised-button($warn-color, $btn-error, $btn-error);
+    }
+
+    &.delete {
+      @include coloring-raised-button($white-color, $btn-delete, $btn-delete);
+      font-size: 500;
+    }
+
+    &.service {
+      @include coloring-raised-button($text-body, $btn-tertiary, $btn-tertiary);
+    }
+
+    &.btn-tertiary {
+      @include coloring-raised-button($icon-secondary, $btn-tertiary, $btn-tertiary);
     }
 
     &.accent {
       @include coloring-raised-button($white-color, $accent-color, $accent-color);
+    }
+
+    // task control btns
+    &.back {
+      @include coloring-raised-button($btn-red, $btn-red-bg, $btn-red-border);
+      @include raised-button-hover($btn-red-bg-hover, $btn-red-border-hover);
+      @include control-btns;
+    }
+
+    &.work {
+      @include coloring-raised-button($btn-blue, $btn-blue-bg, $btn-blue-border);
+      @include raised-button-hover($btn-blue-bg-hover, $btn-blue-border-hover);
+      @include control-btns;
+    }
+
+    &.forward {
+      @include coloring-raised-button($btn-green, $btn-green-bg, $btn-green-border);
+      @include raised-button-hover($btn-green-bg-hover, $btn-green-border-hover);
+      @include control-btns;
+    }
+
+    &.pause {
+      @include coloring-raised-button($btn-secondary, $btn-secondary-bg, $btn-secondary-border);
+      @include raised-button-hover($btn-secondary-bg-hover, $btn-secondary-border-hover);
+      @include control-btns;
     }
   }
 
@@ -97,12 +150,16 @@
       @include coloring-stroked-button($primary-color, $primary-color);
     }
 
+    &.secondary {
+      @include coloring-stroked-button($text-secondary, $icon-border-secondary);
+    }
+
     &.danger {
       @include coloring-stroked-button($warn-color, $warn-color);
     }
 
     &.delete {
-      @include coloring-stroked-button($white-color, $warn-color);
+      @include coloring-stroked-button($white-color, $btn-delete);
     }
   }
 
@@ -123,6 +180,7 @@
     }
   }
 
+  // а он для чего нужен?
   &:active {
     .covering-background {
       background-color: $state-list-item-selected;
@@ -142,17 +200,29 @@
     opacity: 0.3;
   }
 
+  &.narrow {
+    min-width: 89px;
+  }
+
   &.wide {
     min-width: 100px;
   }
 
   &.small {
-    padding: 4px 8px;
+    padding: 6px 12px;
   }
 
   &.full-width {
     max-width: none;
     width: 100%;
+  }
+
+  &.with-icon {
+    .content {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
   }
 
   // Накладываемый слой
@@ -167,9 +237,6 @@
 
   // Содержимое кнопки
   .content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     white-space: pre;
     position: relative;
     z-index: 2;

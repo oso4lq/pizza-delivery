@@ -1,1 +1,27 @@
 <!-- header.component.html -->
+
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">
+      <a [routerLink]="['/', PageRoute.Main]">
+        <img
+          src="assets/images/logo.png"
+          alt="Pizza Cheff"
+          class="header__logo-image"
+        />
+      </a>
+    </div>
+
+    <nav class="header__nav">
+      @for (link of navLinks; track link.path) {
+      <a
+        [routerLink]="['/', link.path]"
+        routerLinkActive="header__nav-link--active"
+        class="header__nav-link"
+      >
+        {{ link.label }}
+      </a>
+      }
+    </nav>
+  </div>
+</header>

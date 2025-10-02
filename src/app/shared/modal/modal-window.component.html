@@ -1,0 +1,112 @@
+<!-- modal-window.component.html -->
+
+<div class="modal-body"
+  [ngClass]="config().type"
+  [style]="modalStyles()"
+  [style.backgroundColor]="bgColor()"
+  (click)="onModalBodyClick($event)"
+>
+
+  <!-- Кнопка закрытия модалки -->
+  <!-- Отображается в desktop, когда передан isShowCloseBtn -->
+  <!-- Отображается в mobile, когда не передан title и передан isShowCloseBtn -->
+  @if( ( !isMobile() && config().isShowCloseBtn ) || ( isMobile() && config().isShowCloseBtn && !title() ) ){
+  <button type="button" class="close-btn" (click)="close(); $event.stopPropagation()">&#10005;</button>
+  }
+
+  <!-- Заголовок модалки -->
+  <header>
+    <!-- Название и кнопка "назад" -->
+    @if( title() ){
+    <h3 [style.backgroundColor]="bgColor()">
+      <!-- Кнопка "назад" для мобильной версии, аналог "закрыть" в десктопе -->
+      @if( isMobile() && config().isShowCloseBtn ){
+        <app-icon name="back" [size]="18" color="service" (click)="close()"/>
+      }
+      <!-- Текст названия -->
+      {{ title() | lang: config().titleParams ?? {} }}
+    </h3>
+    }
+    <!-- Комментарий -->
+    @if( note() ){
+      @if( isSafeHtml() ){
+        <span [ngClass]="noteClass()" class="modal-note" [innerHTML]="note()"></span>
+      } @else {
+        <span [ngClass]="noteClass()" class="modal-note">{{ note() }}</span>
+      }
+    }
+    <!-- Путь -->
+    @if( config().entityPath; as entityPath ){
+    <app-entity-path [path]="entityPath"
+      [ngClass]="{ unclickable: type() !== 'delete' || entityPath.type === 'project', 'without-truncate': type() === 'delete' }" />
+    }
+  </header>
+
+  <!-- Содержимое модалки -->
+  <div class="modal-content" [style.overflowY]="yScrollType()">
+    <!-- Комментарий удаления до -->
+    @if( type() === 'delete' && config().hint?.beforeContent ){
+    <div class="hint before-content">
+      {{ config().hint?.text || ( 'common.deleteHint' | lang ) }}
+    </div>
+    }
+
+    <!-- Содержимое модального окна -->
+    <ng-container #modalWindowContainer />
+
+    <!-- Комментарий удаления после -->
+    @if( type() === 'delete' && !config().hint?.beforeContent ){
+    <div class="hint">
+      {{ config().hint?.text || ( 'common.deleteHint' | lang ) }}
+    </div>
+    }
+  </div>
+
+  <!-- Нижняя часть модалки -->
+  @if( type() !== 'info' ){
+  <footer [style.backgroundColor]="bgColor()">
+
+    <!-- Переключатель -->
+    @if( config().footerSwitch; as checkLabel ){
+    <app-input-checkbox [style]="{ opacity: footerSwitch() ? '1.0' : '0.7' }"
+      [config]="{ type: 'switch', text: checkLabel, wrapperClass: null }" [(value)]="footerSwitch" />
+    }
+
+    <!-- Чекбокс -->
+    @if( config().footerCheck ){
+    <app-input-checkbox [style]="{ width: 'auto', opacity: footerCheck() ? '1.0' : '0.7' }"
+      [config]="footerCheckConfig()" [(value)]="footerCheck" />
+    }
+
+    <!-- Кнопки в дефолтном или указанном порядке -->
+    @for( btn of modalButtons(); track btn.key ){
+      @if( btn.key === 'cancel' ){
+        <button app-stroked-button [class]="btn.class" (click)="buttonAction( btn.key )">
+          {{ btn.title | lang }}
+        </button>
+      } @else if( btn.key === 'save' || btn.key === 'delete' ){
+        <button app-raised-button [class]="btn.class" [disabled]="!formIsValid() || ( actionInProcess && actionInProcess() ) || btn.disabled" (click)="buttonAction( btn.key )">
+          @if( actionInProcess && actionInProcess() ){
+            <app-icon name="small-loading" [size]="14" color="white" class="spinner" />
+          } @else {
+            {{ btn.title | lang }}
+          }
+        </button>
+      } @else {
+        <button app-button [type]="btn.type" [class]="btn.class" (click)="buttonAction( btn.key )">
+          {{ btn.title | lang }}
+        </button>
+      }
+    }
+
+  </footer>
+  }
+
+</div>
+
+<!-- Шаблон группы полей форм для передачи в содержимое модального окна -->
+<ng-template #formGroup>
+  @if( formItems && formItems() ){
+  <app-form [items]="formItems()" [config]="formConfig?.()" [(inputs)]="formInputs" />
+  }
+</ng-template>

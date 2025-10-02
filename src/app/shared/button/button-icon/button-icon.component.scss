@@ -45,27 +45,27 @@
     }
   }
 
-  &.hover-color-dark {
+  &.hover-color-dark:hover {
     @include hoverColor($grey-90);
   }
 
-  &.hover-color-white {
+  &.hover-color-white:hover {
     @include hoverColor($white-color);
   }
 
-  &.hover-color-primary {
+  &.hover-color-primary:hover {
     @include hoverColor($primary-color);
   }
 
-  &.hover-color-warn {
+  &.hover-color-warn:hover {
     @include hoverColor($warn-color);
   }
 
-  &.hover-color-accent {
+  &.hover-color-accent:hover {
     @include hoverColor($accent-color);
   }
 
-  &.hover-color-secondary {
+  &.hover-color-secondary:hover {
     @include hoverColor($text-secondary);
   }
 }

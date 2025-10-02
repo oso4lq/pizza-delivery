@@ -1,13 +1,13 @@
-// frontend/src/app/shared/_ui/button/button.component.ts
+// button.component.ts
 
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input } from '@angular/core'
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, computed } from '@angular/core'
 
-import { ColorKey } from 'src/app/types'
+export type ButtonType = 'stroked' | 'raised' | 'tonal'
 
 const viewTypes = [ 'app-button', 'app-raised-button', 'app-stroked-button', 'app-tonal-button' ]
 
 @Component({
-  selector: 'button[app-button], button[app-raised-button], button[app-stroked-button], button[app-tonal-button]',
+  selector: 'button[app-button]',
   template: `
     <div class="covering-background"></div>
     <span class="content">
@@ -17,11 +17,13 @@ const viewTypes = [ 'app-button', 'app-raised-button', 'app-stroked-button', 'ap
   styleUrl: './button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': 'color()'
+    '[class]': 'color() + " app-" + type() + "-button"'
   }
 })
 export class ButtonComponent implements AfterViewInit {
+
   public color = input<ColorKey>( 'primary' )
+  public type = input<ButtonType>( 'raised' )
 
   constructor( private elementRef: ElementRef<HTMLElement> ){}
 

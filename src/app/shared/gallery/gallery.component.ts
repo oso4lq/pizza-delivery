@@ -1,22 +1,66 @@
 // gallery-modal.component.ts
 
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, OnDestroy, Renderer2, signal, viewChild } from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, signal, viewChild } from '@angular/core'
 import Swiper from 'swiper'
 import { Keyboard, Navigation, Pagination, Thumbs, Zoom } from 'swiper/modules'
+import { IconComponent } from '../icon/icon.component'
+import { AppController } from '../../app.controller'
+import { LayoutService } from '../../services/layout.service'
 
-import { API } from 'src/app/api'
-import { IconComponent } from 'src/app/shared/_ui/icon/icon.component'
-import { UserViewComponent } from 'src/app/shared/components/user/user-view/user-view.component'
-import { DateFormatPipe } from 'src/app/shared/pipes/date-time/date-format.pipe'
-import { Utill } from '../utils'
-import { LayoutService } from 'src/app/layout/layout.service'
-import { AppController } from 'src/app/app.controller'
+// TODO: Убрать лишнее, адаптировать под этот проект
+export interface IFile {
+  /** ID компании, которой принадлежит файл. */
+  cID?: string
+  /** ID родительской сущности, к которой прикреплен файл. */
+  parentID?: string | null
+  /** Уникальный идентификатор файла. */
+  ID: string
+
+  /** Тип файла. */
+  type: 'image' | 'audio' | 'video' | 'doc' | null
+
+  /** MIME-тип файла. */
+  mimeType?: string
+
+  /** Имя файла. */
+  name: string
+  /** Расширение файла. */
+  ext: string
+  /** Размер файла в байтах. */
+  size: number
+  /** Дата создания/модификации файла. */
+  dt: string
+  /** Дополнительные метаданные файла. */
+  meta?: Record<string, any> | null
+
+  /** Флаг готовности файла к использованию. */
+  ready?: boolean
+  /** Флаг наличия превью для файла. */
+  preview?: boolean
+  /** Флаг скрытия файла из общего доступа. */
+  hide?: boolean
+  /** Сообщение об ошибке, если произошла ошибка при обработке файла. */
+  error?: string | null
+
+  /**
+   * Статус вложения:
+   * - 'ready' — файл готов к использованию;
+   * - 'error' — произошла ошибка при обработке или загрузке;
+   * - 'processing' — файл в процессе обработки или загрузки.
+   */
+  state?: 'ready' | 'error' | 'processing';
+
+  /** Дата и время загрузки файла. */
+  uplDt: string
+  /** ID пользователя, загрузившего файл. */
+  uplUID: string
+}
 
 /**
  * Интерфейс вложения (attachment) для файловых и медиа-документов.
  * Используется для представления файлов, прикрепленных к сущностям системы (например, сообщениям, задачам и т.д.).
  */
-interface IGallerySlide extends API.IFile{
+interface IGallerySlide extends IFile{
   sizeStr: string
   /** Описание или комментарий к файлу (опционально). */
   description?: string;
@@ -38,7 +82,7 @@ export interface IGalleryConfig {
 	/** ID группы файлов (опционально) */
 	groupID?: string
 	/** Массив файлов для отображения в галереи */
-  files: API.IFile[]
+  files: IFile[]
 	/** ID файла, с которого начинается просмотр галереи */
   showFID?: string | null
 	/** Исключить документы из отображения (только изображения и видео) */
@@ -55,7 +99,7 @@ export interface IGalleryConfig {
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
-  imports: [ UserViewComponent, IconComponent, DateFormatPipe ],
+  imports: [ IconComponent ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class.gallery-show-ui]': 'isFullScreenMode() && showUI()',
@@ -66,8 +110,7 @@ export interface IGalleryConfig {
     '(window:mousemove)': 'onMouseMove()',
   },
 })
-export class GalleryComponent implements OnDestroy {
-  private renderer = inject( Renderer2 )
+export class GalleryComponent {
   private layoutService = inject( LayoutService )
   private appCtrl = inject( AppController )
 
@@ -98,14 +141,15 @@ export class GalleryComponent implements OnDestroy {
 			// Запоминаем индекс файла для начального отображения
 			if( attach.ID === config.showFID ) currentIndex = items.length
 
-			// Создаем элемент галереи с дополнительными свойствами
-			items.push({
-				...attach,
-        sizeStr: Utill.fileSize( attach.size ),
-				iconUrl: API.fileUrl( attach.ID, 'icon'),
-				previewUrl: API.fileUrl(attach.ID, 'preview'),
-				dataUrl: API.fileUrl(attach.ID, 'data'),
-			})
+      // TODO: доделать для ссылок под этот проект
+			// // Создаем элемент галереи с дополнительными свойствами
+			// items.push({
+			// 	...attach,
+      //   sizeStr: Utill.fileSize( attach.size ),
+			// 	iconUrl: API.fileUrl( attach.ID, 'icon'),
+			// 	previewUrl: API.fileUrl(attach.ID, 'preview'),
+			// 	dataUrl: API.fileUrl(attach.ID, 'data'),
+			// })
 		}
 
 		// Если нет файлов для отображения, закрываем галерею
@@ -223,26 +267,13 @@ export class GalleryComponent implements OnDestroy {
     galleryEl.setAttribute( 'tabindex', '0' )
     galleryEl.focus()
 
-		// Предзагружаем соседние элементы и настраиваем автовоспроизведение видео
+		// Предзагружаем соседние элементы
 		this.preloadAdjacentItems( this.$currentIndex )
-		setTimeout(() => this.setupVideoAutoplay(), 200)
 
 		// Запускаем анимацию появления
 		setTimeout(() => this.animationState.set('visible'), 100)
 
 	})
-
-	//================================================================================
-  // Жизненный цикл
-  //================================================================================
-
-  /**
-   * Очистка ресурсов при уничтожении компонента
-   * Останавливает все воспроизводимые видео
-   */
-  ngOnDestroy() {
-    this.pauseAllVideos()
-  }
 
 	// ------------------------------------------------------------
 
@@ -332,122 +363,6 @@ export class GalleryComponent implements OnDestroy {
 		this.onLoadedStateChange(item, 'loading')
 	}
 
-
-	//================================================================================
-  // UI методы
-  //================================================================================
-
-
-  /**
-   * Скачивает текущий активный файл из галереи
-   * Создает временную ссылку для скачивания и автоматически удаляет её
-   */
-  public async downloadItemFile(): Promise<void> {
-    const idx = this.swiperGallery.activeIndex
-    const slides = this.items()
-    if( idx < 0 || idx >= slides.length ) return
-
-    const slide = slides[ idx ]
-
-    // Создаем временную ссылку для скачивания
-    const link = this.renderer.createElement('a')
-    this.renderer.setAttribute(link, 'href', API.fileUrl( slide.ID, 'data'))
-    this.renderer.setAttribute(link, 'target', '_blank')
-    this.renderer.setAttribute(link, 'download', slide.name || slide.ID )
-    this.renderer.appendChild( document.body, link )
-    link.click()
-    this.renderer.removeChild( document.body, link )
-  }
-
-
-	//================================================================================
-  // Работа с видео слайдами
-  //================================================================================
-
-  /**
-   * Обработчик загрузки метаданных видео
-   * @param event - событие загрузки метаданных
-   * @param slide - элемент галереи с видео
-   */
-  public onVideoLoadedMetadata(event: Event, slide: any): void {
-    console.debug('GalleryModal: Метаданные видео загружены:', slide.ID, slide.name)
-  }
-
-  /**
-   * Обработчик воспроизведения видео
-   * Останавливает другие видео при воспроизведении текущего
-   * @param event - событие воспроизведения
-   * @param slide - элемент галереи с видео
-   */
-  public onVideoPlay(event: Event, slide: any): void {
-    console.debug('GalleryModal: Видео воспроизводится:', slide.ID, slide.name)
-
-    // Останавливаем все другие видео
-    const allVideos = document.querySelectorAll('video[data-video-id]')
-    allVideos.forEach((video: Element) => {
-      const videoElement = video as HTMLVideoElement
-      const videoId = videoElement.getAttribute('data-video-id')
-      if (videoId && videoId !== slide.ID && !videoElement.paused) {
-        videoElement.pause()
-      }
-    })
-  }
-
-  /**
-   * Обработчик паузы видео
-   * @param event - событие паузы
-   * @param slide - элемент галереи с видео
-   */
-  public onVideoPause(event: Event, slide: any): void {
-    console.debug('GalleryModal: Видео на паузе:', slide.ID, slide.name)
-  }
-
-  /**
-   * Обработчик двойного клика по видео
-   * Переключает воспроизведение/паузу
-   * @param event - событие двойного клика
-   * @param slide - элемент галереи с видео
-   */
-  public onVideoDoubleClick(event: Event, slide: any): void {
-    event.preventDefault()
-    const video = event.target as HTMLVideoElement
-
-    if (video.paused) {
-      video.play()
-    } else {
-      video.pause()
-    }
-  }
-
-  /**
-   * Настраивает автовоспроизведение для текущего видео
-   * Запускает воспроизведение если видео готово к воспроизведению
-   */
-  private setupVideoAutoplay(): void {
-		if( this.currentItem().type !== 'video' ) return
-		let video = document.querySelector(`video[data-video-id="${ this.currentItem().ID }"]`) as HTMLVideoElement || null
-    if (video && video.readyState >= 3) {
-      video.play().catch(error => {
-        console.warn('GalleryModal: Не удалось запустить автовоспроизведение:', error)
-      })
-    }
-  }
-
-  /**
-   * Останавливает все воспроизводимые видео в галерее
-   * Используется при закрытии галереи или смене слайда
-   */
-  private pauseAllVideos(): void {
-    const allVideos = document.querySelectorAll('video[data-video-id]')
-    allVideos.forEach((video: Element) => {
-      const videoElement = video as HTMLVideoElement
-      if (!videoElement.paused) {
-        videoElement.pause()
-      }
-    })
-  }
-
-
 	//================================================================================
   // События галереи
   //================================================================================
@@ -460,7 +375,6 @@ export class GalleryComponent implements OnDestroy {
 		const activeIndex = this.swiperGallery.activeIndex
 		this.currentIndex.set( activeIndex )
 		this.preloadAdjacentItems(activeIndex)
-		setTimeout(() => this.setupVideoAutoplay(), 100)
 	}
 
 	/** Таймер для скрытия UI в полноэкранном режиме */
@@ -496,10 +410,10 @@ export class GalleryComponent implements OnDestroy {
         this.close()
         break
 
-      case 'Enter':
-        event.preventDefault()
-        this.downloadItemFile()
-        break
+      // case 'Enter':
+      //   event.preventDefault()
+      //   this.downloadItemFile()
+      //   break
 
 
       case '1':

@@ -1,32 +1,33 @@
-import { Component, HostBinding, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core'
+
 import { ColorKey } from 'src/app/types'
 import { IconComponent } from '../../icon/icon.component'
 import { IconName } from '../../icon/icon-names-data'
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'button[icon][app-icon-button]',
-    templateUrl: './button-icon.component.html',
-    styleUrl: './button-icon.component.scss',
-    imports: [ IconComponent ]
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'button[icon][app-icon-button]',
+  templateUrl: './button-icon.component.html',
+  styleUrl: './button-icon.component.scss',
+  imports: [ IconComponent ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class]': 'hostClasses()'
+  }
 })
 export class ButtonIconComponent {
-  @Input() icon!: IconName
-  @Input() svgStyle: Record<string, any> | null = null
-  @Input() hoverColor?: ColorKey
-  @Input() color?: ColorKey
+  icon       = input<IconName>()
+  svgStyle   = input<Record<string, any> | null>( null )
+  color      = input<ColorKey>()
+  hoverColor = input<ColorKey>()
+  iconSize   = input<number>( 16 )
 
-  @HostBinding('class') get hostClasses() {
-    const classes: Record<string, boolean> = {}
-
-    if (this.color) {
-      classes[this.color] = true
-    }
-
-    if (this.hoverColor) {
-      classes[`hover-color-${this.hoverColor}`] = true
-    }
-
-    return classes
-  }
+  protected hostClasses = computed( () => {
+    let result: string[] = []
+    let color = this.color()
+    if( color ) result.push( color )
+    let hoverColor = this.hoverColor()
+    if( hoverColor ) result.push( `hover-color-${ hoverColor }` )
+    return result.join( ' ' )
+  } )
 }
