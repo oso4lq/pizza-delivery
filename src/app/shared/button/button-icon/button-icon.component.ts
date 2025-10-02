@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core'
-
-import { ColorKey } from 'src/app/types'
 import { IconComponent } from '../../icon/icon.component'
 import { IconName } from '../../icon/icon-names-data'
+import { ColorKey } from '../../types'
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

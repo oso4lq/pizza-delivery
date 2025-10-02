@@ -1,0 +1,137 @@
+<!-- input-select.component.html -->
+
+<app-inputs-wrapper
+  #inputWrapper
+  [config]="config()"
+  [id]="id()"
+  [validateError]="validateError()"
+  [style]="config().cssStyles ?? {}"
+  [style.--dropdown-max-width.px]="config().dropdownMaxWidth"
+  [ngClass]="appendToSignal()"
+>
+  <ng-select
+    #selectComponent
+    [class]="inputClasses()"
+    [style]="config().cssStyles ?? {}"
+    [labelForId]="id()"
+    bindLabel="text"
+    bindValue="id"
+    [items]="displayedOptions()"
+    [ngModel]="selectedId()"
+    [groupBy]="config().groupTitles === 'none' ? '' : 'group'"
+    [placeholder]="placeholder()"
+    [readonly]="config().readonly"
+    [disabled]="config().disabled || false"
+    [multiple]="false"
+    [closeOnSelect]="true"
+    [selectOnTab]="true"
+    [addTag]="config().addOptionFn || false"
+    [appendTo]="appendToSignal() ? '.' + appendToSignal() : 'body'"
+    (change)="onChange( $event )"
+    (open)="openDropdown()"
+    (close)="isOpen.set(false); close.emit()"
+    (blur)="onBlur()"
+    [notFoundText]="config().notFoundText || 'не найдено'"
+    [clearable]="canClear()"
+    [clearOnBackspace]="false"
+    [searchable]="!config().noSearch && isOpen()"
+    [searchFn]="bindedSearchFn"
+    (search)="search.set($event.term)"
+    [tp]="tooltip()?.text"
+    [tpDelay]="tooltip()?.delay ?? 800"
+    [tpPlacement]="tooltip()?.placement ?? 'auto'"
+    [tpMaxWidth]="tooltip()?.maxWidth ?? 'none'"
+    [loading]="config().loading"
+  >
+    <ng-template ng-tag-tmp let-item="item">
+      {{ addOptionText() ?? '+' }}
+    </ng-template>
+
+    <ng-template ng-label-tmp let-item="item">
+      <div class="{{ optionClass() }} {{ item.optionClass }} {{ item.cssClass }}" [style]=" item.cssStyle ? item.cssStyle : '' ">
+        
+        @if( ( config().noSearch || isOpen() === false ) && !config().selected?.hide?.icon && ( config().selected?.icon || item.icon ) ){
+          <app-icon 
+            [src]="config().selected?.icon || item.icon" 
+            [color]="item.iconColor" 
+            [size]="item.iconSize" 
+          />
+        }
+        @if( !config().selected?.hide?.textBefore && item.textBefore ){
+          <span class="text-before">{{ item.textBefore | lang }}</span>
+        }
+        @if( !config().selected?.hide?.text && item.text ){
+          <!-- <span class="text-main" [title]="item.text.length > 50 ? item.text : ''">{{ translateOptions() ? ( item.text | lang ) : item.text  }}</span> --> <!-- | lang -->
+          <!-- <span class="text-main" [title]="item.text.length > 50 ? item.text : ''">{{ translateOptions()  ? (item.text | lang) 
+                                                                                                          : (translateExtraOptions() && isExtraOption(item.value) 
+                                                                                                          ? (item.text | lang) : item.text)   }}
+          </span>  -->
+          <span class="text-main" [tp]="item.text.length > 50 ? item.text : ''" [tpZIndex]="10001" tpClassName="no-arrow" >
+            {{ translateOptions() 
+                ? (item.text | lang) 
+                : (translateExtraOptions() 
+              && isExtraOption(item.value) 
+                ? (item.text | lang)
+                : item.text) }}
+          </span>
+        }
+        @if( !config().selected?.hide?.textAfter && item.textAfter ){
+          <span class="text-after">{{ item.textAfter | lang }}</span>
+        }
+      </div>
+    </ng-template>
+
+    <ng-template ng-optgroup-tmp let-item="item">
+      @switch( config().groupTitles || 'default' ){
+      @case('default'){
+      <div class="group-title">{{ item.group | lang }}</div><!-- {{ translateOptions() ? ( item.group | lang ) : item.group }} -->
+      }
+      @case('separator'){
+      <div class="group-separator"></div>
+      }
+      }
+    </ng-template>
+
+    <ng-template ng-option-tmp let-item="item" let-index="index" >
+      <div class="{{ optionClass() }} {{ item.optionClass }} {{ item.cssClass }}" [style]=" item.cssStyle ? item.cssStyle : '' " >
+        @if( item.icon ){
+          <app-icon [src]="item.icon" [color]="item.iconColor" [size]="item.iconSize" />
+        }
+        @if( item.textBefore ){
+          <span class="text-before">{{ item.textBefore }}</span>
+        }
+        @if( item.text ){
+          @let text = translateOptions() 
+                ? (item.text | lang) 
+                : (translateExtraOptions() 
+              && isExtraOption(item.value) 
+                ? (item.text | lang)
+                : item.text);
+          <span class="text-main" [tp]="text.length > 50 ? item.text : ''" [tpZIndex]="10001" tpClassName="no-arrow">
+            {{ text }}
+          </span>
+        }
+        @if( item.textAfter ){
+          <span class="text-after">{{ item.textAfter }}</span>
+        }
+      </div>
+    </ng-template>
+
+    <ng-template ng-notfound-tmp>
+      <div class="not-found">{{ config().notFoundText ?? 'placeholders.notFound' | lang }}</div>
+    </ng-template>
+
+    @if (config().showAddButton) {
+      <ng-template ng-footer-tmp>
+        <button class="add-button" (click)="selectComponent.close(); clickOnAddButton.emit(); this.config().clickOnAddButton?.()">
+          <app-icon name="plus" color="secondary" svgClass="adaptive-icon" />
+          <span>{{ config().showAddButton }}</span>
+        </button>
+      </ng-template>
+    }
+
+  <ng-template ng-loadingtext-tmp>
+    <app-icon class="spinner" name="small-loading" [size]="36" color="primary"/>
+  </ng-template>
+  </ng-select>
+</app-inputs-wrapper>

@@ -1,12 +1,9 @@
 // modal.types.ts
 
+import { ComponentType } from '@angular/cdk/portal';
 import { Signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { ButtonType } from '../button/button.component';
-// import { IEntityPath } from 'src/app/state/models/shared.model';
-// import { IInputCheckboxConfig } from 'src/app/shared/form/inputs/input-checkbox/input-checkbox.component';
-// import { ComponentType } from '@angular/cdk/portal';
-// import { ButtonType } from 'src/app/shared/_ui/button/button.component';
 
 export type ModalWindowType = 'info' | 'edit' | 'delete';
 
@@ -15,11 +12,11 @@ export type ModalButtonKey = 'save' | 'cancel' | 'delete' | 'close';
 export interface ModalButton {
   key: string;
   title: string;
-  type: ButtonType;     // Тип кнопки: raised (default) или stroked
+  type: ButtonType; // Тип кнопки: raised (default) или stroked
   class: string;
   disabled?: boolean;
   handler?: () => void; // Обработчик действия кнопки
-  order?: number;       // Порядок отображения кнопки
+  order?: number; // Порядок отображения кнопки
 }
 
 export interface IModalWindowConfig {
@@ -41,7 +38,7 @@ export interface IModalWindowConfig {
   noteClass?: string;
   isShowCloseBtn?: boolean;
   titleParams?: Record<string, unknown>;
-  setButtons?: Partial<Record<ModalButtonKey, Partial<ModalButton> | null>>
+  setButtons?: Partial<Record<ModalButtonKey, Partial<ModalButton> | null>>;
   addButtons?: ModalButton[];
   noCloseOnEsc?: boolean;
   noCloseOnClickOutside?: boolean;

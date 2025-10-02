@@ -1,0 +1,70 @@
+// input-text.component.scss
+
+@use './src/globalStyles.scss' as *;
+
+.input-place {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 100%;
+  height: 36px;
+
+  border-radius: 4px;
+  background-color: $input-bg;
+  border: 1px solid $input-bg;
+
+  line-height: 25px;
+  letter-spacing: 0.02em;
+  transition: 0.2s;
+  opacity: 1;
+
+  &.disabled {
+    opacity: 0.6;
+
+    input {
+      color: $text-secondary;
+      cursor: default;
+    }
+  }
+
+  &.readonly {
+    input {
+      color: $text-secondary;
+      cursor: default;
+    }
+  }
+
+  &.focused {
+    border: 1px solid $color-focus;
+  }
+
+  &.invalid {
+    border-color: $color-error;
+  }
+
+  &.match-default .input-field {
+    color: $text-service;
+  }
+
+  &.color-body .input-field {
+    color: $text-body;
+  }
+
+  &.highlighted .input-field {
+    color: $text-primary;
+  }
+
+  app-icon {
+    align-items: center;
+    margin-left: 10px;
+    color: $icon-service;
+  }
+}
+
+.input-field {
+  width: 100%;
+  line-height: 25px;
+  padding: 6px 10px 6px 10px;
+  color: $text-primary;
+}

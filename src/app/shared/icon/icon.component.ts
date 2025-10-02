@@ -13,6 +13,7 @@ import { IconName } from './icon-names-data';
 // import { ColorKey, COLORS } from 'src/app/types'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SvgSpriteService } from './svg-sprite.service';
+import { ColorKey, COLORS } from '../types';
 // import { Exception } from '@/shared/utils'
 export * from './icon-names-data';
 
@@ -211,13 +212,13 @@ export class IconComponent {
     },
   });
 
-  // // ключ внутри COLORS (текущей темы)
-  // color = input(undefined, {
-  //   transform: (color?: ColorKey) => {
-  //     this.$colorHex.set(COLORS[color ?? 'secondary']);
-  //     return color;
-  //   },
-  // });
+  // ключ внутри COLORS (текущей темы)
+  color = input(undefined, {
+    transform: (color?: ColorKey) => {
+      this.$colorHex.set(COLORS[color ?? 'blue']);
+      return color;
+    },
+  });
 
   // прямое указание цвета
   colorHex = input(undefined, {

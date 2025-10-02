@@ -2,12 +2,10 @@
 
 import { Component, signal } from '@angular/core';
 import { LayoutComponent } from './layout/layout.component';
-import { HeaderComponent } from './layout/components/header/header.component';
 
 @Component({
   selector: 'app-root',
   imports: [
-    HeaderComponent,
     LayoutComponent,
   ],
   templateUrl: './app.component.html',

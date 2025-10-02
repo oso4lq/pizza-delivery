@@ -1,6 +1,7 @@
 // button.component.ts
 
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, computed } from '@angular/core'
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input } from '@angular/core'
+import { ColorKey } from '../types'
 
 export type ButtonType = 'stroked' | 'raised' | 'tonal'
 
@@ -22,7 +23,7 @@ const viewTypes = [ 'app-button', 'app-raised-button', 'app-stroked-button', 'ap
 })
 export class ButtonComponent implements AfterViewInit {
 
-  public color = input<ColorKey>( 'primary' )
+  public color = input<ColorKey>( 'blue' )
   public type = input<ButtonType>( 'raised' )
 
   constructor( private elementRef: ElementRef<HTMLElement> ){}

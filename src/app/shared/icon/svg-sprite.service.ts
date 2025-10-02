@@ -19,8 +19,8 @@ export class SvgSpriteService {
       const sprite = resp.data;
       // if (!sprite) throw new Exception('Core', 'Error load svg sprite!', { url: this.spriteUrl });
       if (!sprite) {
-        console.error('Error load svg sprite!', { url: this.spriteUrl })
-        return
+        console.error('Error load svg sprite!', { url: this.spriteUrl });
+        return;
       }
       // Вставляем его в DOM как скрытый элемент
       const div = this.document.createElement('div');
@@ -31,13 +31,15 @@ export class SvgSpriteService {
       const iconDropDown = this.getSymbol('drop-down');
       // if (!iconDropDown) throw new Exception('Core', 'Icon drop-down not found!');
       if (!iconDropDown) {
-        console.error('Error load svg sprite!', { url: this.spriteUrl })
-        return
+        console.error('Error load svg sprite!', { url: this.spriteUrl });
+        return;
       }
       const viewBox = iconDropDown.getAttribute('viewBox') || '0 0 17 17';
       // Формируем полноценный SVG, оборачивая содержимое символа
       const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">${iconDropDown.innerHTML}</svg>`;
-      const encodedSvg = encodeURIComponent(svgString).replace(/'/g, '%27').replace(/"/g, '%22');
+      const encodedSvg = encodeURIComponent(svgString)
+        .replace(/'/g, '%27')
+        .replace(/"/g, '%22');
       const dataUrl = `url("data:image/svg+xml,${encodedSvg}")`;
       // Для body устанавливаем глобальную переменную, которую возьмёт SCSS.
       // Глубже (например в app-root) нельзя, т.к. dropdown с позиционированием 'body' не будут иметь иконку.
