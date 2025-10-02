@@ -1,20 +1,31 @@
-<label [tp]="config().details | lang" [tpDelay]="800" [for]="id()">
-  <span class="label-shared" [ngClass]="validClass() ? validClass() : ''">{{ config().text | lang }}</span>
+<!-- label.component.html -->
+
+<label [for]="id()">
+  <span class="label-shared" [ngClass]="validClass() ? validClass() : ''">{{
+    config().text
+  }}</span>
 </label>
 
-@if( iconName() ) {
-  @if( config().url ) {
-    <a class="label-info-url"
-      [style.display]="config().hideIconOnInit ? 'none' : 'flex'"
-      [href]="config().url" target="_blank" rel="noopener noreferrer">
-      <ng-container *ngTemplateOutlet="icon"></ng-container>
-    </a>
-  }
-  @else {
-    <ng-container *ngTemplateOutlet="icon"></ng-container>
-  }
-}
+@if( iconName() ) { @if( config().url ) {
+<a
+  class="label-info-url"
+  [style.display]="config().hideIconOnInit ? 'none' : 'flex'"
+  [href]="config().url"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <ng-container *ngTemplateOutlet="icon"></ng-container>
+</a>
+} @else {
+<ng-container *ngTemplateOutlet="icon"></ng-container>
+} }
 
 <ng-template #icon>
-  <app-icon [src]="iconName()" [color]="config().iconColor" [colorHex]="config().iconColorHex" svgClass="adaptive-icon" [tp]="config().details | lang" />
+  <app-icon
+    [src]="iconName()"
+    [color]="config().iconColor"
+    [colorHex]="config().iconColorHex"
+    svgClass="adaptive-icon"
+    [tp]="config().details"
+  />
 </ng-template>

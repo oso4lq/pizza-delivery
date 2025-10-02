@@ -1,4 +1,4 @@
-// frontend/src/app/shared/_ui/icon/icon.component.ts
+// icon.component.ts
 
 import { CommonModule } from '@angular/common';
 import {
@@ -10,11 +10,9 @@ import {
   signal,
 } from '@angular/core';
 import { IconName } from './icon-names-data';
-// import { ColorKey, COLORS } from 'src/app/types'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SvgSpriteService } from './svg-sprite.service';
 import { ColorKey, COLORS } from '../types';
-// import { Exception } from '@/shared/utils'
 export * from './icon-names-data';
 
 /**  -----------------------------------

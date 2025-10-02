@@ -1,27 +1,32 @@
-import { ChangeDetectionStrategy, Component, computed, input, Signal } from '@angular/core'
-import { NgClass, NgTemplateOutlet } from '@angular/common'
+// label.component.ts
 
-import { TippyDirective } from '@ngneat/helipopper'
-import { IconName } from '../../_ui/icon/icon-names-data'
-import { IconComponent } from '../../_ui/icon/icon.component'
-import { ColorKey } from 'src/app/types'
-import { LanguagePipe } from 'src/app/shared/pipes/language.pipe'
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  Signal,
+} from '@angular/core';
+import { IconName } from '../../icon/icon-names-data';
+import { IconComponent } from '../../icon/icon.component';
+import { ColorKey } from '../../types';
 
-export interface InputsLabelConfig{
+export interface InputsLabelConfig {
   /** Текст для метки. */
-  text: string
+  text: string;
   /** Наименование иконки справа от текста метки. */
-  icon?: IconName
+  icon?: IconName;
   /** Наименование цвета иконки из цветовой темы {@link ColorKey}. */
-  iconColor?: ColorKey
+  iconColor?: ColorKey;
   /** Цвет иконки в формате #RRGGBB. */
-  iconColorHex?: string
+  iconColorHex?: string;
   /** URL на который будет отправлять иконка при клике на неё. */
-  url?: string
+  url?: string;
   /** Текст подсказки показывающийся при наведении на иконку. */
-  details?: string
+  details?: string;
   /** true - скрыть иконку при инициализации компонента. */
-  hideIconOnInit?: boolean
+  hideIconOnInit?: boolean;
 }
 
 @Component({
@@ -29,20 +34,16 @@ export interface InputsLabelConfig{
   selector: 'app-inputs-label',
   templateUrl: './label.component.html',
   styleUrl: './label.component.scss',
-  imports: [
-    NgClass,
-    LanguagePipe,
-    NgTemplateOutlet,
-    TippyDirective,
-    IconComponent,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [NgClass, NgTemplateOutlet, IconComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputsLabelComponent {
-  id = input.required()
-  config = input.required<InputsLabelConfig>()
+  id = input.required();
+  config = input.required<InputsLabelConfig>();
 
-  validClass = input<string>( '' )
+  validClass = input<string>('');
 
-  iconName: Signal<IconName | undefined> = computed( () => this.config().url ? this.config().icon ?? 'info-filled' : this.config().icon )
+  iconName: Signal<IconName | undefined> = computed(() =>
+    this.config().url ? this.config().icon ?? 'info-filled' : this.config().icon
+  );
 }

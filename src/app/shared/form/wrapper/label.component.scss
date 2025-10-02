@@ -1,5 +1,7 @@
-@use 'sass:color';
-@use './src/globalStyles.scss' as *;
+// label.component.scss
+
+@use "sass:color";
+@use "/src/globalStyles.scss" as *;
 
 :host {
   display: flex;

@@ -1,5 +1,6 @@
 @use 'sass:color';
-@use './src/globalStyles.scss' as *;
+// @use '../../.././globalStyles.scss' as *;
+@use '/src/globalStyles.scss';
 
 :host {
   position: fixed;

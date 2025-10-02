@@ -1,32 +1,34 @@
 // inputs-wrapper.component.ts
 
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core'
-import { InputConfig, InputTooltip } from '../input.component'
-import { CommonModule } from '@angular/common'
-import { InputsLabelComponent, InputsLabelConfig } from './label.component'
-import { IconComponent } from 'src/app/shared/_ui/icon/icon.component';
-import { TippyDirective } from '@ngneat/helipopper'
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { IconComponent } from '../../icon/icon.component';
+import { InputConfig } from '../input.component';
+import { InputsLabelComponent, InputsLabelConfig } from './label.component';
 
 @Component({
   selector: 'app-inputs-wrapper',
   template: `
     @if( config().label ) {
-      <div class="label-with-icon">
-        <app-inputs-label [id]="id()" [config]="label()" [validClass]=" validateError() ? 'invalid' : '' " />
-        @if( config().showInfoIcon && tooltipCfg() ){
-          <app-icon
-            name="info-filled"
-            [size]="12"
-            color="service"
-            [tp]="tooltipCfg()?.text"
-            [tpPlacement]="'right'"
-          />
-        }
-      </div>
+    <div class="label-with-icon">
+      <app-inputs-label
+        [id]="id()"
+        [config]="label()"
+        [validClass]="validateError() ? 'invalid' : ''"
+      />
+      @if( config().showInfoIcon ){
+      <app-icon name="info-filled" [size]="12" color="service" />
+      }
+    </div>
     }
     <ng-content />
     @if( validateError() && !config().hideErrorMessage ){
-      <p class="error-message"> {{ validateError() }} </p>
+    <p class="error-message">{{ validateError() }}</p>
     }
   `,
   styles: `
@@ -42,33 +44,17 @@ import { TippyDirective } from '@ngneat/helipopper'
       }
     }
   `,
-  imports: [
-    CommonModule,
-    InputsLabelComponent,
-    IconComponent,
-    TippyDirective,
-  ],
+  imports: [CommonModule, InputsLabelComponent, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputsWrapperComponent {
-  config = input.required<InputConfig>()
-  id = input.required<InputConfig[ 'id' ]>()
-  validateError = input.required<string | null>()
-  label = computed<InputsLabelConfig>( ()=>{
-    const label = this.config().label
-    if( !label ) return { text: this.id() } as InputsLabelConfig
-    if( typeof label === 'string' ) return { text: label }
-    return label as InputsLabelConfig
-  })
-
-  /**
-   * Преобразуем любые tooltip в единый InputTooltip
-   */
-  readonly tooltipCfg = computed<InputTooltip | undefined>(() => {
-    const cfg = this.config()
-    if( !cfg.showInfoIcon || !cfg.tooltip ) return undefined
-    return typeof cfg.tooltip === 'string'
-      ? { text: cfg.tooltip }
-      : cfg.tooltip
-  })
+  config = input.required<InputConfig>();
+  id = input.required<InputConfig['id']>();
+  validateError = input.required<string | null>();
+  label = computed<InputsLabelConfig>(() => {
+    const label = this.config().label;
+    if (!label) return { text: this.id() } as InputsLabelConfig;
+    if (typeof label === 'string') return { text: label };
+    return label as InputsLabelConfig;
+  });
 }

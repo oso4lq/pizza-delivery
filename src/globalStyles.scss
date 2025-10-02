@@ -1,0 +1,17 @@
+// globalStyles.scss
+
+@forward "./styles/_colors";
+@forward "./styles/_reset";
+
+:root {
+  --modal-vertical-spacing: 12px;
+  --modal-horizontal-spacing: 12px;
+}
+
+/// Полная ширина экрана с учётом dynamic view width или view width
+$full-screen-width: calc(100 * var(--dvw));
+/// Полная высота экрана с учётом dynamic view height или view height
+$full-screen-height: calc(100 * var(--dvh));
+
+$modal-vertical-spacing: var(--modal-vertical-spacing);
+$modal-horizontal-spacing: var(--modal-horizontal-spacing);

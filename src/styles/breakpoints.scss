@@ -1,0 +1,157 @@
+@use "sass:map";
+@use "sass:list";
+@use "sass:meta";
+
+// -------------------- Shared variables for app-layout and app-chat-panel:
+
+/// Высота полоски загрузки
+$desktop-top-line-height: 4px;
+/// Высота header
+$desktop-header-height: 31px;
+/// Расстояние между grid строками в layout
+$desktop-layout-grid-row-gap: 20px;
+/// Отступ сверху
+$desktop-padding-top: 16px;
+/// Отступ снизу
+$desktop-padding-bottom: 20px;
+
+/// Padding в layout в диапазоне >= 1400px ... <= 2560px
+$desktop-default-padding: 40px;
+/// Padding в layout при ширине < 1400px
+$desktop-tablet-padding: 24px;
+/// Padding в layout при ширине > 2560px
+$desktop-ultra-wide-padding: 120px;
+
+// -------------------- Standard Bootstrap framework breakpoints (in number):
+
+/// <= 575 - Extra small screen
+$width-xs:         575;
+/// <= 767 - Small screen
+$width-sm:         767;
+/// <= 991 - Medium screen
+$width-md:         991;
+/// <= 1199 - Large screen
+$width-lg:        1199;
+/// <= 1399 - Extra large screen
+$width-xl:        1399;
+/// >= 1400 - Extra extra large screen
+$width-xxl:       1400;
+
+// -------------------- Standard Bootstrap framework breakpoints (in pixels):
+
+/// <= 575px - Extra small screen
+$width-xs-px:    575px;
+/// <= 767px - Small screen
+$width-sm-px:    767px;
+/// <= 991px - Medium screen
+$width-md-px:    991px;
+/// <= 1199px - Large screen
+$width-lg-px:   1199px;
+/// <= 1399px - Extra large screen
+$width-xl-px:   1399px;
+/// >= 1400px - Extra extra large screen
+$width-xxl-px:  1400px;
+
+// -------------------- Other breakpoints (in number):
+
+/// <= 320 iPhone 4/5/SE
+$width-320:        320;
+/// <= 375 iPhone 6/7/8/X
+$width-375:        375;
+$width-1200:      1200;
+$width-1680:      1680;
+$width-1920:      1920;
+$width-2560:      2560;
+
+// -------------------- Other breakpoints (in pixels):
+
+/// <= 320px - iPhone 4/5/SE
+$width-320-px:   320px;
+/// <= 375px - iPhone 6/7/8/X
+$width-375-px:   375px;
+$width-1200-px: 1200px;
+$width-1680-px: 1680px;
+$width-1920-px: 1920px;
+$width-2560-px: 2560px;
+
+/// Mixin to generate media request to check max-width. Usage example:
+///   @use './src/styles/breakpoints.scss' as bp;
+///   @include bp.screen-width( 1440 ){ background-color: gray; }
+///   @include bp.screen-width( bp.$width-320 ){ background-color: red; }
+/// NOTE: $breakpoint value ​​in successive queries must go from largest to smallest.
+/// @param {number} $breakpoint - any correct non-zero number.
+/// @param {bool} $shift-to-left - true, $breakpoint must be decremented. Default: false.
+/// @output @media (max-width: $breakpoint) { content }
+@mixin screen-width($breakpoint, $shift-to-left: false) {
+  @if meta.type-of($breakpoint) != number {
+    @error "Break point value #{$breakpoint} must be a number";
+  }
+  @if $shift-to-left {
+    @media (max-width: #{$breakpoint - 1}px) { @content; }
+  }
+  @else {
+    @media (max-width: #{$breakpoint}px) { @content; }
+  }
+}
+
+/// Mixin to generate media request to check min-width. Usage example:
+///   @use './src/styles/breakpoints.scss' as bp;
+///   @include bp.screen-width-above( bp.$width-md ){ background-color: brown; }
+///   @include bp.screen-width-above( 1199 ){ background-color: cadetblue; }
+/// NOTE: $breakpoint value ​​in successive queries must go from smallest to largest.
+/// @param {number} $breakpoint - any correct non-zero number.
+/// @param {bool} $shift-to-right - true, $breakpoint must be incremented. Default: false.
+/// @output @media (min-width: $breakpoint) { content }
+@mixin screen-width-above($breakpoint, $shift-to-right: false) {
+  @if meta.type-of($breakpoint) != number {
+    @error "Break point value #{$breakpoint} must be a number";
+  }
+  @if $shift-to-right {
+    @media (min-width: #{$breakpoint + 1}px) { @content; }
+  }
+  @else {
+    @media (min-width: #{$breakpoint}px) { @content; }
+  }
+}
+
+/// Mixin to generate media request to check width range. Usage example:
+///   @use './src/styles/breakpoints.scss' as bp;
+/// - by Bootstrap breakpoint title:
+///   @include bp.screen-width-in( xxl ){ background-color: green; }
+///   @include bp.screen-width-in( xl ){ background-color: brown; }
+/// - by min and max breakpoints values:
+///   @include bp.screen-width-in( 1200, bp.$width-xl ){ background-color: yellow; }
+///   @include bp.screen-width-in( bp.$width-md, 1199 ){ background-color: blue; }
+/// NOTE: $min and $max values ​​in successive queries must go from largest to smallest.
+/// @param {string | number} $min - one of Bootstrap breakpoints title "xs sm md lg xl xxl" or
+/// any correct non-zero number.
+/// @param {number | null} $max - null or any correct non-zero number and must be greater than $min.
+/// @output @media (min-width: min_value) and (max-width: max_value) { content }
+@mixin screen-width-in($min, $max: null) {
+  @if list.index(xs sm md lg xl xxl, $min) == null {
+    @if $max == null {
+      @media (min-width: #{$min}px) { @content; }
+    }
+    @else {
+      @media (min-width: #{$min}px) and (max-width: #{$max}px) { @content; }
+    }
+  }
+  @else if $min == xs {
+    @media (max-width: $width-xs-px) { @content; }
+  }
+  @else if $min == sm {
+    @media (min-width: ($width-xs-px + 1px)) and (max-width: $width-sm-px) { @content; }
+  }
+  @else if $min == md {
+    @media (min-width: ($width-sm-px + 1px)) and (max-width: $width-md-px) { @content; }
+  }
+  @else if $min == lg {
+    @media (min-width: ($width-md-px + 1px)) and (max-width: $width-lg-px) { @content; }
+  }
+  @else if $min == xl {
+    @media (min-width: ($width-lg-px + 1px)) and (max-width: $width-xl-px) { @content; }
+  }
+  @else if $min == xxl {
+    @media (min-width: $width-xxl-px) { @content; }
+  }
+}

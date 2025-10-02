@@ -3,9 +3,9 @@
 import { Component, computed, ChangeDetectionStrategy, output } from '@angular/core'
 import { InputComponent, InputConfig } from '../input.component'
 import { IInputTextConfig, InputTextComponent } from './input-text/input-text.component'
-import { Utill } from 'src/app/shared/utils'
 import { CountriesDictionary, } from '../../countries-dictionary.class'
-import { IconComponent } from 'src/app/shared/_ui/icon/icon.component';
+import { IconComponent } from '../../icon/icon.component'
+import { Utill } from '../../utils'
 
 // --------------------------------- Модели и интерфейсы для компонента
 
@@ -133,13 +133,13 @@ export class InputPhoneComponent extends InputComponent<IInputPhoneConfig> {
     }
 
     if( !value ){
-      if( setValidateError ) this.validateError.set( this.langService.get( emptyPhone ) )
+      if( setValidateError ) this.validateError.set( 'Нет номера телефона' )
       return false
     }
 
     let country = this.selectedCountry()
     if( !country ){
-      if( setValidateError ) this.validateError.set( this.langService.get( incorrectPhone ) )
+      if( setValidateError ) this.validateError.set( 'Неверный номер телефона' )
       return false
     }
 
@@ -149,7 +149,7 @@ export class InputPhoneComponent extends InputComponent<IInputPhoneConfig> {
     // --------------------------------- Проверка длины номера телефона.
 
     let isPhoneLengthValid = phone.length === country.phoneLength
-    if ( !isPhoneLengthValid ) error = this.langService.get( incorrectPhone )
+    if ( !isPhoneLengthValid ) error = 'Неверный номер телефона'
 
     // --------------------------------- Проверка начала номера телефона на допустимый country.area код.
 
@@ -160,7 +160,7 @@ export class InputPhoneComponent extends InputComponent<IInputPhoneConfig> {
     // недопустимой area кода для текущей страны.
     let isPhoneAreaInvalid = country.invalidArea && country.invalidArea.findIndex( x => phone.startsWith(x) ) >= 0
     isPhoneAreaValid = isPhoneAreaValid && !isPhoneAreaInvalid
-    if ( !isPhoneAreaValid ) error = this.langService.get( incorrectPhone )
+    if ( !isPhoneAreaValid ) error = 'Неверный номер телефона'
 
     if( setValidateError )
       // При появлении одного и того же сообщения об ошибке "Неверный номер телефона" или "Incorrect phone"

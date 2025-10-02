@@ -1,10 +1,8 @@
 // modal-window.component.scss
 
 @use 'sass:color';
-@use './src/globalStyles.scss' as *;
-@use './src/styles/breakpoints.scss' as bp;
-
-$modal-bg: $white-color;
+@use '../../../globalStyles.scss' as *;
+@use '../../../styles/breakpoints.scss' as bp;
 
 @mixin maxSizes($offset) {
   max-width: calc(100vw - $offset);
@@ -28,7 +26,7 @@ $modal-bg: $white-color;
     white-space: pre-line;
     margin-top: $modal-vertical-spacing;
     font-size: 13px;
-    color: $warn-color;
+    color: $red-color;
 
     &.before-content {
       margin-top: 0;
@@ -108,7 +106,7 @@ $modal-bg: $white-color;
   top: 6px;
   width: 24px;
   height: 24px;
-  color: $icon-menu;
+  color: $service-color;
   z-index: 2;
 
   &:hover {
@@ -141,16 +139,12 @@ header {
   .modal-note {
     font-size: 13px;
     line-height: 18px;
-    color: $text-body;
+    color: $text-description;
     white-space: pre-line;
 
     &.warn {
-      color: $warn-color;
+      color: $red-color;
     }
-  }
-
-  app-entity-path {
-    padding: 5px 0;
   }
 
 }
