@@ -39,38 +39,38 @@ export const routes: Routes = [
         },
       },
 
-    //   // Напитки
-    //   {
-    //     path: PageRoute.Drinks,
-    //     pathMatch: 'full',
-    //     loadComponent: () =>
-    //       import('./pages/02_drinks/drinks-page.component').then(
-    //         (m) => m.DrinksPageComponent
-    //       ),
-    //     data: {},
-    //   },
+      //   // Напитки
+      //   {
+      //     path: PageRoute.Drinks,
+      //     pathMatch: 'full',
+      //     loadComponent: () =>
+      //       import('./pages/02_drinks/drinks-page.component').then(
+      //         (m) => m.DrinksPageComponent
+      //       ),
+      //     data: {},
+      //   },
 
-    //   // Доставка
-    //   {
-    //     path: PageRoute.Delivery,
-    //     pathMatch: 'full',
-    //     loadComponent: () =>
-    //       import('./pages/03_delivery/delivery-page.component').then(
-    //         (m) => m.DeliveryPageComponent
-    //       ),
-    //     data: {},
-    //   },
+      //   // Доставка
+      //   {
+      //     path: PageRoute.Delivery,
+      //     pathMatch: 'full',
+      //     loadComponent: () =>
+      //       import('./pages/03_delivery/delivery-page.component').then(
+      //         (m) => m.DeliveryPageComponent
+      //       ),
+      //     data: {},
+      //   },
 
-    //   // Контакты
-    //   {
-    //     path: PageRoute.Contacts,
-    //     pathMatch: 'full',
-    //     loadComponent: () =>
-    //       import('./pages/04_contacts/contacts.component').then(
-    //         (m) => m.ContactsComponent
-    //       ),
-    //     data: {},
-    //   },
+      //   // Контакты
+      //   {
+      //     path: PageRoute.Contacts,
+      //     pathMatch: 'full',
+      //     loadComponent: () =>
+      //       import('./pages/04_contacts/contacts.component').then(
+      //         (m) => m.ContactsComponent
+      //       ),
+      //     data: {},
+      //   },
 
       // Редирект для несуществующих маршрутов
       {

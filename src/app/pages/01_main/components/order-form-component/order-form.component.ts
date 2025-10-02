@@ -1,10 +1,12 @@
+// order-form.component.ts
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-order-form-component',
   imports: [],
-  templateUrl: './order-form-component.html',
-  styleUrl: './order-form-component.scss'
+  templateUrl: './order-form.component.html',
+  styleUrl: './order-form.component.scss'
 })
 export class OrderFormComponent {
 
