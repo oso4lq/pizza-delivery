@@ -1,0 +1,177 @@
+// frontend/src/app/shared/_ui/button/button.component.scss
+
+@use './src/globalStyles.scss' as *;
+
+:host[app-button],
+:host[app-raised-button],
+:host[app-stroked-button],
+:host[app-tonal-button] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  // padding: 8px 16px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0.03em;
+  border: 1px solid;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: 0.2s;
+  cursor: pointer;
+  user-select: none;
+
+  // Миксин для raised-button
+  @mixin coloring-raised-button($color-variable, $background-variable, $border-variable) {
+    color: $color-variable;
+    background-color: $background-variable;
+    border-color: $border-variable;
+  }
+
+  // Миксин для hover-состояния task control btns
+  @mixin raised-button-hover($bg-hover, $border-hover) {
+    &:hover {
+      .covering-background {
+        background-color: transparent;
+      }
+
+      background-color: $bg-hover;
+      border-color: $border-hover;
+    }
+  }
+
+  // Миксин для task control btns
+  @mixin control-btns() {
+    font-size: 11px;
+    line-height: 16px;
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+  }
+
+  // Миксин для stroked-button
+  @mixin coloring-stroked-button($color-variable, $border-variable) {
+    border: 1px solid $border-variable;
+    color: $color-variable;
+  }
+
+  @mixin coloring-tonal-button($color-variable) {
+    $bgTonalColor: color-mix(in srgb, $color-variable 16%, transparent);
+    border: 1px solid $bgTonalColor;
+    color: $color-variable;
+    background-color: $bgTonalColor;
+  }
+
+  // ОБЩИЙ КЛАСС ДЛЯ raised - кнопки с заполнением фона
+  &.app-raised-button {
+    // определяем цвета под конкретный тип кнопки
+    // ТЕКСТ, ФОН, КОНТУР
+
+    &.primary {
+      @include coloring-raised-button($white-color, $primary-color, $primary-color);
+    }
+
+    &.danger {
+      @include coloring-raised-button($warn-color, $pink-color, $pink-color);
+    }
+
+    &.accent {
+      @include coloring-raised-button($white-color, $accent-color, $accent-color);
+    }
+  }
+
+  // ОБЩИЙ КЛАСС ДЛЯ stroked - (полу)прозрачной кнопки с контуром
+  &.app-stroked-button {
+    // определяем цвета под конкретный тип кнопки
+    // ТЕКСТ, КОНТУР
+
+    &.primary {
+      @include coloring-stroked-button($primary-color, $primary-color);
+    }
+
+    &.danger {
+      @include coloring-stroked-button($warn-color, $warn-color);
+    }
+
+    &.delete {
+      @include coloring-stroked-button($white-color, $warn-color);
+    }
+  }
+
+  // ОБЩИЙ КЛАСС ДЛЯ tonal - фон с непрозрачностью
+  &.app-tonal-button {
+    // определяем цвета под конкретный тип кнопки
+    // ФОН
+
+    &.primary {
+      @include coloring-tonal-button($primary-color);
+    }
+  }
+
+  &:hover {
+    // Затемнение в светлой теме, осветление в тёмной
+    .covering-background {
+      background-color: $state-list-item-hover;
+    }
+  }
+
+  &:active {
+    .covering-background {
+      background-color: $state-list-item-selected;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+
+    .covering-background {
+      background-color: transparent;
+    }
+  }
+
+  &.invalid {
+    opacity: 0.3;
+  }
+
+  &.wide {
+    min-width: 100px;
+  }
+
+  &.small {
+    padding: 4px 8px;
+  }
+
+  &.full-width {
+    max-width: none;
+    width: 100%;
+  }
+
+  // Накладываемый слой
+  .covering-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  // Содержимое кнопки
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: pre;
+    position: relative;
+    z-index: 2;
+  }
+}

@@ -1,0 +1,134 @@
+@let _config = config();
+@let _isMobile = isMobile();
+@let _currentItem = currentItem();
+@let _items = items();
+
+<div #galleryContainer class="swiper-container swiper-gallery">
+  @if( _isMobile && _currentItem ){
+    <header class="mobile-header">
+      <button type="button" class="mobile-header-btn" (click)="close()">
+        <app-icon name="back" color="white" [size]="18" />
+      </button>
+      <div class="mobile-header-user">
+        <app-user-view class="from-gallery-modal"
+          [config]="{
+            userID: _currentItem!.uplUID,
+            note: ( ( _currentItem!.dt | dateFormat:'DD.MM.YYYY HH:mm' ) ?? '' ),
+            nameStyle: { 'color': 'var(--theme-text-on-color)', 'font-size': '12px' },
+            roleStyle: { 'color': 'var(--theme-grey-60)', 'font-size': '11px' },
+            noteStyle: { 'color': 'var(--theme-grey-60)', 'font-size': '11px' },
+          }" />
+      </div>
+      <button type="button" class="mobile-header-btn" (click)="downloadItemFile()">
+        <app-icon name="download2" color="white" [size]="18" />
+      </button>
+    </header>
+  }
+  @else {
+    <app-icon class="close-btn" color="oncolor" [name]="'clear'" [size]="12" (click)="close()"/>
+  }
+
+  <div class="swiper-wrapper swiper-wrapper-main">
+    @for( slide of _items; track slide.ID ){
+      <div class="swiper-slide swiper-gallery-card">
+        @switch( slide.type ){
+          @case( 'image' ){
+            <!-- Swiper по умолчанию поддерживает zoom только для тегов img, picture или canvas-->
+            <div class="swiper-zoom-container">
+              <img [src]="slide.previewUrl" [alt]="slide.name || 'Изображение'" loading="lazy"
+                (loadstart)="onLoadedStateChange( slide, 'loading' )"
+                (error)="onLoadedStateChange( slide, 'failed' )"
+                (load)="onLoadedStateChange( slide, 'loaded' )">
+            </div>
+          }
+          @case( 'video' ){
+            <video [src]="slide.dataUrl" [poster]="slide.iconUrl" [attr.data-video-id]="slide.ID"
+              controls preload="metadata"
+              (loadstart)="onLoadedStateChange( slide, 'loading' )"
+              (loadedmetadata)="onVideoLoadedMetadata( $event, slide )"
+              (canplay)="onLoadedStateChange( slide, 'loaded' )"
+              (error)="onLoadedStateChange( slide, 'failed' )"
+              (play)="onLoadedStateChange( slide, 'loaded' )"
+              (pause)="onVideoPause( $event, slide )"
+              (dblclick)="onVideoDoubleClick( $event, slide )">
+            </video>
+          }
+          @case( 'doc' ){
+            <div class="file-preview-fallback">
+              <app-icon [src]="slide.iconUrl" [size]="64" />
+              <div class="file-info">
+                <div class="file-name">{{ slide.name || 'Файл' }}</div>
+                <div class="file-size">{{ slide.sizeStr }}</div>
+              </div>
+            </div>
+          }
+          @default {
+            <div class="file-preview-fallback">
+              <app-icon [src]="slide.iconUrl" [size]="64" />
+              <div class="file-info">
+                <div class="file-name">{{ slide.name || 'Файл' }}</div>
+                <div class="file-size">{{ slide.sizeStr }}</div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    }
+  </div>
+
+  @if( _isMobile ){
+    @if( _currentItem!.description ){
+      <div class="mobile-description">{{ _currentItem!.description }}</div>
+    }
+  }
+  @else {
+    @if( _currentItem!.description ){
+      <div class="info-block">{{ _currentItem!.description }}</div>
+    }
+    <footer class="footer">
+      <div class="footer__content">
+        <div class="footer__user">
+          <app-user-view class="from-gallery-modal"
+            [config]="{
+              userID: _currentItem!.uplUID,
+              note: ( ( _currentItem!.dt | dateFormat:'DD.MM.YYYY HH:mm' ) ?? '' ),
+              nameStyle: { 'color': 'var(--theme-text-on-color)', 'font-size': '12px' },
+              roleStyle: { 'color': 'var(--theme-grey-60)', 'font-size': '11px' },
+              noteStyle: { 'color': 'var(--theme-grey-60)', 'font-size': '11px' },
+            }" />
+        </div>
+
+        <div class="footer__preview">
+          @if( !_config.hideThumbs && _items.length > 1 ){
+            <div #thumbsContainer class="swiper-container swiper-thumbs">
+              <div class="swiper-wrapper swiper-thumbs-wrapper">
+                @for( slide of _items; track slide.ID){
+                  <div class="swiper-slide thumb">
+                    <img [src]="slide.iconUrl" [alt]="slide.name || ( 'thumb-' + slide.ID )" loading="lazy" />
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="file-info-block">
+          <div class="file-info-text">
+            <span class="file-name">{{ _currentItem!.name }}</span>
+            <span class="file-details">{{ _currentItem!.ext }}{{ _currentItem!.sizeStr }}</span>
+          </div>
+          <app-icon name="download2" [size]="20" title="Скачать (Ctrl+S)" class="download-btn"
+            (click)="downloadItemFile()" />
+        </div>
+      </div>
+    </footer>
+
+    @if( _items.length ){
+      <div class="swiper-controls">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    }
+  }
+
+</div>

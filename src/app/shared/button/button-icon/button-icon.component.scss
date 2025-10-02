@@ -1,0 +1,71 @@
+@use './src/globalStyles.scss' as *;
+
+@mixin hoverColor($color-variable) {
+  app-icon {
+    color: $color-variable;
+  }
+}
+
+:host {
+  line-height: 0;
+
+  &.dark {
+    app-icon {
+      color: $grey-90;
+    }
+  }
+
+  &.white {
+    app-icon {
+      color: $white-color;
+    }
+  }
+
+  &.primary {
+    app-icon {
+      color: $primary-color;
+    }
+  }
+
+  &.warn {
+    app-icon {
+      color: $warn-color;
+    }
+  }
+
+  &.accent {
+    app-icon {
+      color: $accent-color;
+    }
+  }
+
+  &.secondary {
+    app-icon {
+      color: $icon-secondary;
+    }
+  }
+
+  &.hover-color-dark {
+    @include hoverColor($grey-90);
+  }
+
+  &.hover-color-white {
+    @include hoverColor($white-color);
+  }
+
+  &.hover-color-primary {
+    @include hoverColor($primary-color);
+  }
+
+  &.hover-color-warn {
+    @include hoverColor($warn-color);
+  }
+
+  &.hover-color-accent {
+    @include hoverColor($accent-color);
+  }
+
+  &.hover-color-secondary {
+    @include hoverColor($text-secondary);
+  }
+}
