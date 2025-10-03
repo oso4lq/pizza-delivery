@@ -1,6 +1,5 @@
 @use 'sass:color';
-// @use '../../.././globalStyles.scss' as *;
-@use '/src/globalStyles.scss';
+@use "globalStyles.scss" as *;
 
 :host {
   position: fixed;
@@ -147,7 +146,7 @@
 .file-name {
   font-size: 12px;
   font-weight: 500;
-  color: var(--theme-text-on-color);
+  color: $white-color;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -155,20 +154,8 @@
 
 .file-details {
   font-size: 11px;
-  color: var(--theme-grey-60);
+  color: $white-color;
   white-space: nowrap;
-}
-
-.download-btn {
-  @extend .gallery-btn;
-  width: 16px;
-  height: 16px;
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.2s;
-  flex-shrink: 0;
-  &:hover {
-    color: rgba(255, 255, 255, 1);
-  }
 }
 
 .footer__preview .swiper-thumbs {
@@ -268,7 +255,7 @@
     @extend .gallery-btn;
     width: 48px;
     height: 48px;
-    color: $grey-60;
+    color: $white-color;
     &:after {
       font-size: 32px;
     }

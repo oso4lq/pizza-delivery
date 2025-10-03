@@ -37,6 +37,9 @@
               "node_modules/swiper/swiper-bundle.min.css",
               "src/globalStyles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src"]
+            },
             "allowedCommonJsDependencies": [
               "country-codes-list"
             ]

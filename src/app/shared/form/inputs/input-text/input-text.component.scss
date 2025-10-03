@@ -1,6 +1,6 @@
 // input-text.component.scss
 
-@use '/src/globalStyles.scss' as *;
+@use "globalStyles.scss" as *;
 
 .input-place {
   display: flex;
@@ -11,8 +11,8 @@
   height: 36px;
 
   border-radius: 4px;
-  background-color: $input-bg;
-  border: 1px solid $input-bg;
+  background-color: $bg-main;
+  border: 1px solid $bg-main;
 
   line-height: 25px;
   letter-spacing: 0.02em;
@@ -35,12 +35,8 @@
     }
   }
 
-  &.focused {
-    border: 1px solid $color-focus;
-  }
-
   &.invalid {
-    border-color: $color-error;
+    border-color: $red-color;
   }
 
   &.match-default .input-field {
@@ -48,7 +44,7 @@
   }
 
   &.color-body .input-field {
-    color: $text-body;
+    color: $red-color;
   }
 
   &.highlighted .input-field {
@@ -58,7 +54,7 @@
   app-icon {
     align-items: center;
     margin-left: 10px;
-    color: $icon-service;
+    color: $service-color;
   }
 }
 

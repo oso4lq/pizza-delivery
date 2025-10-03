@@ -1,6 +1,9 @@
 // button.component.scss
 
-@use './src/globalStyles.scss' as *;
+@use "globalStyles.scss" as *;
+
+$state-list-item-hover: rgba(255,255,255,0.06);
+$state-list-item-selected: rgba(91,134,190,0.18);
 
 :host[app-button],
 :host[app-raised-button],
@@ -25,7 +28,11 @@
   user-select: none;
 
   // Миксин для raised-button
-  @mixin coloring-raised-button($color-variable, $background-variable, $border-variable) {
+  @mixin coloring-raised-button(
+    $color-variable,
+    $background-variable,
+    $border-variable
+  ) {
     color: $color-variable;
     background-color: $background-variable;
     border-color: $border-variable;
@@ -71,105 +78,48 @@
 
   // ОБЩИЙ КЛАСС ДЛЯ raised - кнопки с заполнением фона
   &.app-raised-button {
-    // определяем цвета под конкретный тип кнопки
     // ТЕКСТ, ФОН, КОНТУР
 
-    &.primary {
-      @include coloring-raised-button($white-color, $primary-color, $primary-color);
-    }
-
-    &.orange {
-      @include coloring-raised-button($orange-color, $work-time-vacation-color, $work-time-vacation-color);
+    &.blue {
+      @include coloring-raised-button($white-color, $blue-color, $blue-color);
     }
 
     &.grey {
-      @include coloring-raised-button($text-body, $icon-border-secondary, $icon-border-secondary);
+      @include coloring-raised-button(
+        $white-color,
+        $text-secondary,
+        $text-secondary
+      );
     }
 
     &.red {
-      @include coloring-raised-button($red-color, $work-time-sick-color, $work-time-sick-color);
-    }
-
-    &.secondary {
-      @include coloring-raised-button($text-secondary, $btn-tertiary, $btn-tertiary);
-    }
-
-    &.danger {
-      @include coloring-raised-button($warn-color, $btn-error, $btn-error);
-    }
-
-    &.delete {
-      @include coloring-raised-button($white-color, $btn-delete, $btn-delete);
-      font-size: 500;
-    }
-
-    &.service {
-      @include coloring-raised-button($text-body, $btn-tertiary, $btn-tertiary);
-    }
-
-    &.btn-tertiary {
-      @include coloring-raised-button($icon-secondary, $btn-tertiary, $btn-tertiary);
-    }
-
-    &.accent {
-      @include coloring-raised-button($white-color, $accent-color, $accent-color);
-    }
-
-    // task control btns
-    &.back {
-      @include coloring-raised-button($btn-red, $btn-red-bg, $btn-red-border);
-      @include raised-button-hover($btn-red-bg-hover, $btn-red-border-hover);
-      @include control-btns;
-    }
-
-    &.work {
-      @include coloring-raised-button($btn-blue, $btn-blue-bg, $btn-blue-border);
-      @include raised-button-hover($btn-blue-bg-hover, $btn-blue-border-hover);
-      @include control-btns;
-    }
-
-    &.forward {
-      @include coloring-raised-button($btn-green, $btn-green-bg, $btn-green-border);
-      @include raised-button-hover($btn-green-bg-hover, $btn-green-border-hover);
-      @include control-btns;
-    }
-
-    &.pause {
-      @include coloring-raised-button($btn-secondary, $btn-secondary-bg, $btn-secondary-border);
-      @include raised-button-hover($btn-secondary-bg-hover, $btn-secondary-border-hover);
-      @include control-btns;
+      @include coloring-raised-button($white-color, $red-color, $red-color);
     }
   }
 
   // ОБЩИЙ КЛАСС ДЛЯ stroked - (полу)прозрачной кнопки с контуром
   &.app-stroked-button {
-    // определяем цвета под конкретный тип кнопки
     // ТЕКСТ, КОНТУР
 
-    &.primary {
-      @include coloring-stroked-button($primary-color, $primary-color);
+    &.blue {
+      @include coloring-stroked-button($blue-color, $blue-color);
     }
 
     &.secondary {
-      @include coloring-stroked-button($text-secondary, $icon-border-secondary);
+      @include coloring-stroked-button($text-secondary, $text-secondary);
     }
 
-    &.danger {
-      @include coloring-stroked-button($warn-color, $warn-color);
-    }
-
-    &.delete {
-      @include coloring-stroked-button($white-color, $btn-delete);
+    &.red {
+      @include coloring-stroked-button($red-color, $red-color);
     }
   }
 
   // ОБЩИЙ КЛАСС ДЛЯ tonal - фон с непрозрачностью
   &.app-tonal-button {
-    // определяем цвета под конкретный тип кнопки
     // ФОН
 
     &.primary {
-      @include coloring-tonal-button($primary-color);
+      @include coloring-tonal-button($blue-color);
     }
   }
 

@@ -1,7 +1,7 @@
 // label.component.scss
 
 @use "sass:color";
-@use "/src/globalStyles.scss" as *;
+@use "globalStyles.scss" as *;
 
 :host {
   display: flex;
@@ -19,7 +19,7 @@
   }
 
   & svg {
-    color: $icon-secondary;
+    color: $white-color;
     width: 100%;
     height: 100%;
   }
