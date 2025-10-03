@@ -1,16 +1,11 @@
 // layout.service.ts
 
-import { inject, Injectable, OnDestroy, signal } from '@angular/core'
-import { Router } from '@angular/router'
-import { PageRoute } from '../app.routes'
-import { AppController } from '../app.controller'
+import { Injectable, OnDestroy, signal } from '@angular/core'
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutService implements OnDestroy {
-  private router = inject( Router )
-  private appCtrl  = inject( AppController )
 
   public below900px          = signal<boolean>( false ) // true, если ширина ≤ 900px
   public below1000px         = signal<boolean>( false ) // true, если ширина ≤ 1000px
@@ -76,7 +71,6 @@ export class LayoutService implements OnDestroy {
   }
 
   setMobileVersion(): void {
-    this.appCtrl.$modalClose()
     this.onResize()
   }
 
