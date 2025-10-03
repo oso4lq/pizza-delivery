@@ -1,31 +1,28 @@
 <!-- product-card.component.html -->
 
-<div class="flex-col product-card">
-  <div class="product-card__image-wrapper">
-    <img
-      [src]="product().imageUrl"
-      [alt]="product().name"
-      class="w-h-100 product-card__image"
-      loading="lazy"
-    />
-  </div>
+<div class="image-wrapper">
+  <img
+    [src]="product().imageUrl"
+    [alt]="product().name"
+    class="w-h-100 product-card__image"
+    loading="lazy"
+  />
+</div>
 
-  <div class="product-card__content">
-    <h5 class="product-card__title">{{ product().name }}</h5>
+<div class="card">
+  <h5 class="card__title">{{ product().name }}</h5>
 
-    <p class="product-card__description">{{ product().description }}</p>
+  <p class="card__description">{{ product().description }}</p>
 
-    <div class="product-card__footer">
-      <!-- <span class="product-card__price">{{ product().price }} ₽</span> -->
-
-      <button app-button
-        color="brand"
-        type="raised"
-        class="product-card__button full-width"
-        (click)="onAddToCart()"
-      >
-        В корзину
-      </button>
-    </div>
+  <div class="card__footer">
+    <button
+      app-button
+      color="brand"
+      type="raised"
+      class="full-width"
+      (click)="onAddToCart()"
+    >
+      В корзину
+    </button>
   </div>
 </div>

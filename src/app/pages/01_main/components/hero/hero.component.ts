@@ -1,6 +1,6 @@
 // hero.component.ts
 
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IconComponent } from '../../../../shared/icon/icon.component';
 import { ButtonComponent } from '../../../../shared/button/button.component';
 
@@ -15,6 +15,7 @@ interface HeroFeature {
   imports: [IconComponent, ButtonComponent],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroComponent {
   protected readonly features: HeroFeature[] = [

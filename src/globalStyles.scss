@@ -11,17 +11,6 @@
   font-display: swap;
 }
 
-@mixin noScrollBar {
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
 // ==========================================
 // =============/VARIABLES\==============
 // ==========================================
@@ -82,7 +71,7 @@ $btn-color: #ffaf18;
 $border-input: #b99150;
 
 // =============/BOX SHADOWS\=============
-$menu-shadow: 0 12px 32px rgba(0,0,0,0.1);
+$shadow-normal: 0 12px 32px rgba(0,0,0,0.1);
 $state-item-hover: "rgba(255,255,255,0.06)";
 
 // ==========================================
@@ -196,10 +185,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-smooth: antialiased;
   text-rendering: optimizeLegibility;
-
-  * {
-    @include noScrollBar;
-  }
 }
 
 // ==========================================

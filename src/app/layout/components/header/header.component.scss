@@ -3,6 +3,10 @@
 @use "globalStyles.scss" as *;
 
 :host {
+  display: flex;
+  width: 100%;
+  background-color: $white-color;
+  box-shadow: $shadow-normal;
   position: sticky;
   top: 0;
   left: 0;
@@ -11,32 +15,21 @@
 }
 
 .header {
-  background-color: $bg-main;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-
-  &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
-  }
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-sm $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &__logo {
     flex-shrink: 0;
+  }
 
-    &-link {
-      display: block;
-      text-decoration: none;
-    }
-
-    &-image {
-      height: 50px;
-      width: auto;
-      display: block;
-    }
+  &__link {
+    display: block;
+    text-decoration: none;
   }
 
   &__text {
@@ -47,12 +40,10 @@
   }
 
   &__nav {
-    // display: flex;
-    // align-items: center;
-    gap: 40px;
+    gap: $spacing-2xl;
   }
 
-  &__nav-link {
+  &__navlink {
     position: relative;
     color: $text-link;
     text-decoration: none;
@@ -62,17 +53,15 @@
       color: $text-primary;
     }
 
-    &_active {
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -8px;
-        height: 3px;
-        background-color: $text-secondary;
-        border-radius: 2px;
-      }
+    &_active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 3px;
+      background-color: $text-secondary;
+      border-radius: 2px;
     }
   }
 }
@@ -80,21 +69,14 @@
 // Адаптивность для планшетов
 @media (max-width: 900px) {
   .header {
-    &__container {
-      height: 70px;
-      padding: 0 16px;
-    }
-
-    // &__logo-image {
-    //   height: 45px;
-    // }
+    padding: $spacing-xs $spacing-sm;
 
     &__nav {
-      gap: 24px;
+      gap: $spacing-xl;
     }
 
-    &__nav-link {
-      font-size: 15px;
+    &__navlink {
+      font-size: 16px;
     }
   }
 }
@@ -102,23 +84,14 @@
 // Адаптивность для мобильных устройств
 @media (max-width: 600px) {
   .header {
-    &__container {
-      height: 60px;
-      padding: 0 12px;
-    }
-
-    // &__logo-image {
-    //   height: 40px;
-    // }
-
     &__nav {
-      gap: 16px;
+      gap: $spacing-lg;
     }
 
-    &__nav-link {
+    &__navlink {
       font-size: 14px;
 
-      &--active::after {
+      &_active::after {
         bottom: -6px;
         height: 2px;
       }

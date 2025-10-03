@@ -1,6 +1,6 @@
 // product-card.component.ts
 
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { IProduct } from '../../../../models/product.model';
 import { ButtonComponent } from '../../../../shared/button/button.component';
 
@@ -9,6 +9,7 @@ import { ButtonComponent } from '../../../../shared/button/button.component';
   imports: [ButtonComponent],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
   product = input.required<IProduct>();

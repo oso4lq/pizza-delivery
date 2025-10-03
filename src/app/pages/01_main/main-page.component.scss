@@ -2,97 +2,42 @@
 
 @use "globalStyles.scss" as *;
 
-.main-page {
+:host {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
+  gap: $spacing-md;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
-
-  &__hero {
-    grid-column: 1 / -1;
-    margin-top: 40px;
-  }
-
-  &__products {
-    grid-column: 1 / -1;
-    margin-top: 60px;
-  }
-
-  &__section-title {
-    grid-column: 1 / -1;
-    text-align: center;
-    // // font-size: 32px;
-    // // font-weight: 700;
-    // // line-height: 1.2;
-    // color: $text-primary;
-    // margin-bottom: 40px;
-  }
-
-  &__loading {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 60px 20px;
-    // font-size: 18px;
-    color: $text-service;
-  }
-
-  &__order {
-    grid-column: 1 / -1;
-    margin-top: 80px;
-    margin-bottom: 80px;
-  }
+  padding: 0 $spacing-md;
 }
 
-// Адаптивность для планшетов
+section {
+  grid-column: 1 / -1;
+  margin-top: $spacing-lg;
+}
+
+.section-title {
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: $spacing-lg $spacing-md;
+  color: $text-service;
+}
+
+.order {
+  margin: $spacing-lg 0;
+}
+
 @media (max-width: 900px) {
-  .main-page {
-    padding: 0 16px;
-    gap: 16px;
-
-    &__hero {
-      margin-top: 32px;
-    }
-
-    &__products {
-      margin-top: 48px;
-    }
-
-    // &__section-title {
-    //   // font-size: 28px;
-    //   margin-bottom: 32px;
-    // }
-
-    &__order {
-      margin-top: 60px;
-      margin-bottom: 60px;
-    }
+  .order {
+    margin: $spacing-md 0;
   }
 }
 
-// Адаптивность для мобильных устройств
 @media (max-width: 600px) {
-  .main-page {
-    padding: 0 12px;
-    gap: 12px;
-
-    &__hero {
-      margin-top: 24px;
-    }
-
-    &__products {
-      margin-top: 40px;
-    }
-
-    &__section-title {
-      // font-size: 24px;
-      margin-bottom: 24px;
-    }
-
-    &__order {
-      margin-top: 48px;
-      margin-bottom: 48px;
-    }
+  .order {
+    margin: $spacing-sm 0;
   }
 }

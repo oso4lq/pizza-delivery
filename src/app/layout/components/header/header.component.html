@@ -1,27 +1,25 @@
 <!-- header.component.html -->
 
 <header class="header">
-  <div class="header__container">
-    <!-- Логотип -->
-    <div class="flex-row center-row header__logo">
-      <a [routerLink]="['/', PageRoute.Main]" class="header__logo-link">
-        <app-icon src="assets/imgs/logo.png" [size]="68" />
-      </a>
-      <span class="header__text">Pizza<br>Cheff</span>
-    </div>
-
-    <!-- Навигация -->
-    <nav class="flex-grow flex-row center-all header__nav">
-      @for (link of navLinks; track link.path) {
-
-      <a
-        [routerLink]="['/', link.path]"
-        routerLinkActive="header__nav-link_active"
-        class="header__nav-link"
-      >
-        {{ link.label }}
-      </a>
-      }
-    </nav>
+  <!-- Логотип -->
+  <div class="flex-row center-row header__logo">
+    <a [routerLink]="['/', PageRoute.Main]" class="header__link">
+      <app-icon src="assets/imgs/logo.png" [size]="68" />
+    </a>
+    <span class="header__text">Pizza<br />Cheff</span>
   </div>
+
+  <!-- Навигация -->
+  <nav class="flex-grow flex-row center-all header__nav">
+    @for (link of navLinks; track link.path) {
+
+    <a
+      [routerLink]="['/', link.path]"
+      routerLinkActive="header__navlink_active"
+      class="header__navlink"
+    >
+      {{ link.label }}
+    </a>
+    }
+  </nav>
 </header>

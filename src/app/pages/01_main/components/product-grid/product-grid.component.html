@@ -1,13 +1,13 @@
 <!-- product-grid.component.html -->
 
-<div class="product-grid">
-  @for (product of products(); track product.ID) {
-  <div class="product-grid__item">
-    <app-product-card [product]="product" (addToCart)="onAddToCart($event)" />
-  </div>
-  } @empty {
-  <div class="product-grid__empty">
-    <p>Продукты не найдены</p>
-  </div>
-  }
+@for (product of products(); track product.ID) {
+<app-product-card
+  class="grid-item"
+  [product]="product"
+  (addToCart)="onAddToCart($event)"
+/>
+} @empty {
+<div class="grid-empty">
+  <p>Продукты не найдены</p>
 </div>
+}

@@ -1,6 +1,11 @@
 // main-page.component.ts
 
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { IProduct } from '../../models/product.model';
 import { ProductsService } from '../../services/product.service';
 import { HeroComponent } from './components/hero/hero.component';
@@ -12,6 +17,7 @@ import { ProductGridComponent } from './components/product-grid/product-grid.com
   imports: [HeroComponent, ProductGridComponent, OrderFormComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent {
   private productsService = inject(ProductsService);

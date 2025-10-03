@@ -1,37 +1,28 @@
 <!-- hero.component.html -->
 
-<div class="hero">
-  <div class="hero__content">
-    <div class="hero__text">
-      <h1 class="hero__title">
-        Самая вкусная пицца в мире<br />
-        только в <span class="hero__brand">Pizza Cheff</span>
-      </h1>
+<div class="text">
+  <h1 class="title">
+    Самая вкусная пицца в мире<br />
+    только в <span class="title_brand">Pizza Cheff</span>
+  </h1>
 
-      <div class="hero__features">
-        @for (feature of features; track feature.title) {
-        <div class="hero__feature">
-          <app-icon [src]="feature.icon" [size]="60" />
-          <!-- <span class="hero__feature-icon">{{  }}</span> -->
-          <div class="hero__feature-content">
-            <h6 class="hero__feature-title">{{ feature.title }}</h6>
-            <p class="hero__feature-description">{{ feature.description }}</p>
-          </div>
-        </div>
-        }
+  <div class="feature__block">
+    @for (feature of features; track feature.title) {
+    <div class="feature">
+      <app-icon [src]="feature.icon" [size]="60" />
+      <div class="feature__content">
+        <h6 class="feature__title">{{ feature.title }}</h6>
+        <p class="feature__description">{{ feature.description }}</p>
       </div>
-
-      <button app-button color="brand" type="raised" class="hero__button" (click)="scrollToProducts()">
-        Выбрать пиццу
-      </button>
     </div>
-
-    <div class="hero__image">
-      <img
-        src="assets/imgs/hero_pizza.png"
-        alt="Пицца Pizza Cheff"
-        class="hero__image-pic"
-      />
-    </div>
+    }
   </div>
+
+  <button app-button color="brand" type="raised" (click)="scrollToProducts()">
+    Выбрать пиццу
+  </button>
+</div>
+
+<div class="image">
+  <img src="assets/imgs/hero_pizza.png" alt="Пицца Pizza Cheff" />
 </div>

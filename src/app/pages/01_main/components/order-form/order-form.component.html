@@ -1,71 +1,66 @@
 <!-- order-form.component.html -->
 
-<div class="order-form">
-  <div class="order-form__content">
-    <div class="order-form__info">
-      <h2 class="order-form__title">
-        <span class="order-form__title_brand">Хватит думать!</span
-        ><br />Доставим заказ за 30 минут!
-      </h2>
+<div class="info">
+  <h2 class="info__title">
+    <span class="info__title_brand">Хватит думать!</span><br />Доставим
+    заказ за 30 минут!
+  </h2>
 
-      <p class="order-form__description">
-        Мы гарантированно доставим вашу пиццу за 30 минут с момента оформления
-        заказа. Если мы опоздаем даже на 1 минуту - вы получите весь заказ
-        бесплатно и вкуснейшую скидку на следующий заказ. Мы гордимся нашим
-        сервисом и делаем всё, чтобы наш клиент был доволен и не остался
-        голодным!
-      </p>
-    </div>
+  <p class="info__description">
+    Мы гарантированно доставим вашу пиццу за 30 минут с момента оформления
+    заказа. Если мы опоздаем даже на 1 минуту, вы получаете весь заказ бесплатно
+    и ваучер на скидку на следующий заказ. Мы гордимся нашим сервисом и сделаем
+    всё, чтобы наш клиент был доволен и не остался голодный!
+  </p>
+</div>
 
-    <form class="order-form__form" (ngSubmit)="onSubmit()">
-      <input
-        type="text"
-        class="order-form__input"
-        placeholder="Ваше имя"
-        [(ngModel)]="name"
-        name="name"
-        required
-      />
+<form class="form" (ngSubmit)="onSubmit()">
+  <input
+    type="text"
+    class="form__input"
+    placeholder="Ваше имя"
+    [(ngModel)]="name"
+    name="name"
+    required
+  />
 
-      <input
-        type="text"
-        class="order-form__input"
-        placeholder="Адрес доставки"
-        [(ngModel)]="address"
-        name="address"
-        required
-      />
+  <input
+    type="text"
+    class="form__input"
+    placeholder="Адрес доставки"
+    [(ngModel)]="address"
+    name="address"
+    required
+  />
 
-      <input
-        type="tel"
-        class="order-form__input"
-        placeholder="Телефон"
-        [(ngModel)]="phone"
-        name="phone"
-        required
-      />
+  <input
+    type="tel"
+    class="form__input"
+    placeholder="Телефон"
+    [(ngModel)]="phone"
+    name="phone"
+    required
+  />
 
-      <button
-        app-button
-        color="brand"
-        type="raised"
-        class="order-form__button"
-        [disabled]="isSubmitting() || !name() || !address() || !phone()"
-      >
-        @if (isSubmitting()) {
-        <span>Оформление...</span>
-        } @else {
-        <span>Оформить заказ</span>
-        }
-      </button>
-    </form>
+  <button
+    app-button
+    color="brand"
+    type="raised"
+    class="order-form__button"
+    [disabled]="isSubmitting() || !name() || !address() || !phone()"
+  >
+    @if (isSubmitting()) {
+    <span>Оформление...</span>
+    } @else {
+    <span>Оформить заказ</span>
+    }
+  </button>
+</form>
 
-    <div class="order-form__image">
-      <img
-        src="assets/imgs/footer_pizza.png"
-        alt="Свежая пицца"
-        class="order-form__image-pic"
-      />
-    </div>
-  </div>
+<div class="footer-image">
+  <img
+    src="assets/imgs/footer_pizza.png"
+    alt="Свежая пицца"
+    class="order-form__image-pic"
+  />
 </div>

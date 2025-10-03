@@ -1,6 +1,6 @@
 // order-form.component.ts
 
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IOrder } from '../../../../models/order.model';
 import { OrderService } from '../../../../services/order.service';
@@ -11,6 +11,7 @@ import { ButtonComponent } from '../../../../shared/button/button.component';
   imports: [FormsModule, ButtonComponent],
   templateUrl: './order-form.component.html',
   styleUrl: './order-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderFormComponent {
   private orderService = inject(OrderService);
