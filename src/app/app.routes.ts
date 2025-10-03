@@ -14,8 +14,6 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'prefix',
-    loadComponent: () =>
-      import('./layout/layout.component').then((m) => m.LayoutComponent),
     children: [
       // Главная страница (redirect)
       {

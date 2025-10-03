@@ -1,0 +1,35 @@
+// _colors.scss
+
+@use "sass:map";
+
+// ==========================================
+// =============/CSS VARIABLES\==============
+// ==========================================
+
+// =============/COLORS\=============
+$black-color:               #000000;
+$service-color:             #868C94;
+$white-color:               #FFFFFF;
+$blue-color:                #16A4E3;
+$green-color:               #1BBA69;
+$red-color:                 #CE0000;
+$pink-color:                #F5CCCC;
+$orange-color:              #FF9000;
+
+// =============/BACKGROUND\=============
+$bg-main:                   #FFFFFF;
+
+// =============/TEXT\=============
+$text-primary:              #b99150;
+$text-secondary:            #ffaf18;
+$text-service:              #382400;
+$text-description:          #181a1a;
+
+// =============/BUTTONS\=============
+$btn-color:                 #ffaf18;
+
+// =============/BORDERS\=============
+$border-input:              #b99150;
+
+// =============/BOX SHADOWS\=============
+$menu-shadow:              '0 12px 32px rgba(0,0,0,0.72)',
