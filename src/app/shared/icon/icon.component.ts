@@ -9,10 +9,10 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { IconName } from './icon-names-data';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { SvgSpriteService } from './svg-sprite.service';
 import { ColorKey, COLORS } from '../types';
+import { IconName } from './icon-names-data';
+import { SvgSpriteService } from './svg-sprite.service';
 export * from './icon-names-data';
 
 /**  -----------------------------------
@@ -33,13 +33,11 @@ export * from './icon-names-data';
     <svg
       [ngClass]="svgClass()"
       [ngStyle]="svgStyle()"
-      [ngStyle]="{ color: $colorHex() }"
+      [style.color]="$colorHex()"
       [attr.viewBox]="viewBox()"
       [style.cursor]="clickable() ? 'pointer' : 'unset'"
       [attr.width]="$width()"
       [attr.height]="$height()"
-      [attr.title]="tp()"
-      [attr.aria-label]="tp()"
       (click)="handleClick()"
       role="img"
       aria-hidden="true"
@@ -55,6 +53,7 @@ export * from './icon-names-data';
       [height]="$width()"
       [width]="$height()"
       [style]="svgStyle()"
+      [style.cursor]="clickable() ? 'pointer' : 'unset'"
       (click)="handleClick()"
       alt=""
     />
@@ -74,6 +73,10 @@ export * from './icon-names-data';
         overflow: visible;
       }
       img {
+        display: block;
+        object-fit: contain;
+      }
+      .round {
         border-radius: 50%;
       }
       .square {
@@ -110,12 +113,19 @@ export class IconComponent {
    *   [clickable]="true"
    *   (iconClick)="onIconClicked()"
    * ></app-icon>
+   * 
+   * Для прямых ссылок на изображения:
+   * <app-icon 
+   *   [src]="'assets/imgs/logo.png'"
+   *   [size]="68"
+   * ></app-icon>
    ----------------------------------- */
 
   /** -----------------------------------
    * Компонент принимает на вход:
    * обязательно:
    *  @name - тэг, по нему ищется иконка.
+   *  @src - прямая ссылка на изображение
    * опционально:
    *  @svgClass - кастомный класс (или будет defaultSvgStyle),
    *  @width и @height - размеры (используются, если size не задан),
@@ -165,14 +175,22 @@ export class IconComponent {
         return src;
       }
 
-      const isIcon = !src.startsWith('/') && !src.startsWith('http');
-      this.isIcon.set(isIcon);
-      this.icon.set(src);
+      // Определяем, является ли это прямой ссылкой на файл
+      const isDirectUrl =
+        src.startsWith('assets/') ||
+        src.startsWith('/') ||
+        src.startsWith('http');
 
-      if (isIcon) {
+      if (isDirectUrl) {
+        // Это прямая ссылка на изображение
+        this.isIcon.set(false);
+        this.icon.set(src);
+      } else {
+        // Это имя иконки из спрайта
+        this.isIcon.set(true);
         const symbol = this.spriteSrv.getSymbol(src);
         if (!symbol) {
-          console.error('Core', `Invalid icon name: ${name}`);
+          console.error('Core', `Invalid icon name: ${src}`);
           return;
         }
         const vb = symbol.getAttribute('viewBox');
@@ -226,12 +244,10 @@ export class IconComponent {
     },
   });
 
-  tp = input<any>(); // tooltip
-
   clickable = input<boolean>(false); // некликабельность
   iconClick = output<void>(); // emitter
   handleClick() {
-    if (!this.clickable()) this.iconClick.emit();
+    if (this.clickable()) this.iconClick.emit();
   }
 
   // ----------------------------

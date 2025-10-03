@@ -3,14 +3,11 @@
 <header class="header">
   <div class="header__container">
     <!-- Логотип -->
-    <div class="header__logo">
+    <div class="flex-row center-row header__logo">
       <a [routerLink]="['/', PageRoute.Main]" class="header__logo-link">
-        <img
-          src="assets/imgs/logo.png"
-          alt="Pizza Cheff"
-          class="header__logo-image"
-        />
+        <app-icon src="assets/imgs/logo.png" [size]="68" />
       </a>
+      <span>Pizza Cheff</span>
     </div>
 
     <!-- Навигация -->

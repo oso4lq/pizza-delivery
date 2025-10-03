@@ -2,13 +2,16 @@
 
 @use "globalStyles.scss" as *;
 
-.header {
+:host {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: var(--theme-background-bg-main);
+}
+
+.header {
+  background-color: $bg-main;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
   &__container {
@@ -80,9 +83,9 @@
       padding: 0 16px;
     }
 
-    &__logo-image {
-      height: 45px;
-    }
+    // &__logo-image {
+    //   height: 45px;
+    // }
 
     &__nav {
       gap: 24px;
@@ -102,9 +105,9 @@
       padding: 0 12px;
     }
 
-    &__logo-image {
-      height: 40px;
-    }
+    // &__logo-image {
+    //   height: 40px;
+    // }
 
     &__nav {
       gap: 16px;

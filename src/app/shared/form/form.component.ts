@@ -48,7 +48,6 @@ import { ElementStyle } from './input.component';
           [src]="title.tag.icon"
           [size]="12"
           [color]="title.tag.iconColor"
-          [tp]="title.tag.tp ?? null"
           tpPlacement="right"
         />
         }

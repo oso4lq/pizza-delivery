@@ -3,6 +3,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { PageRoute } from '../../../app.routes';
+import { IconComponent } from '../../../shared/icon/icon.component';
 
 interface NavLink {
   path: PageRoute;
@@ -11,7 +12,7 @@ interface NavLink {
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, IconComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
