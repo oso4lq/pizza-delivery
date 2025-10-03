@@ -74,7 +74,7 @@
     gap: $spacing-md;
   }
 
-  .features {
+  .feature__block {
     grid-template-columns: 1fr;
     gap: $spacing-md;
   }
@@ -94,18 +94,18 @@
     text-align: center;
   }
 
-  .features {
-    grid-template-columns: 1fr;
-    gap: $spacing-sm;
-  }
-
   .feature {
     gap: $spacing-sm;
+
+    &__block {
+      grid-template-columns: 1fr;
+      gap: $spacing-sm;
+    }
   }
 
   .image {
     grid-column: 1 / -1;
-    margin-top: 20px;
+    margin-top: $spacing-lg;
 
     img {
       max-width: 400px;
