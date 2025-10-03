@@ -1,8 +1,14 @@
 // order-form.component.ts
 
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IOrder } from '../../../../models/order.model';
+import { CartService } from '../../../../services/cart.service';
 import { OrderService } from '../../../../services/order.service';
 import { ButtonComponent } from '../../../../shared/button/button.component';
 
@@ -15,6 +21,7 @@ import { ButtonComponent } from '../../../../shared/button/button.component';
 })
 export class OrderFormComponent {
   private orderService = inject(OrderService);
+  private cartService = inject(CartService);
 
   protected name = signal<string>('');
   protected address = signal<string>('');
@@ -24,11 +31,20 @@ export class OrderFormComponent {
   protected onSubmit(): void {
     if (this.isSubmitting()) return;
 
+    // Получаем товары из корзины
+    const cartItems = this.cartService.items();
+
+    // Проверяем, что корзина не пуста
+    if (cartItems.length === 0) {
+      alert('Ваша корзина пуста! Добавьте товары перед оформлением заказа.');
+      return;
+    }
+
     const order: IOrder = {
       name: this.name(),
       address: this.address(),
       phone: this.phone(),
-      items: [], // TODO: Получить из CartService
+      items: cartItems,
     };
 
     this.isSubmitting.set(true);
@@ -36,13 +52,21 @@ export class OrderFormComponent {
     this.orderService.submitOrder(order).subscribe({
       next: (response) => {
         console.log('Заказ успешно отправлен:', response);
+
+        // Показываем сообщение об успехе
         alert(response.message);
+
+        // Очищаем корзину
+        this.cartService.clear();
+
+        // Сбрасываем форму
         this.resetForm();
+
         this.isSubmitting.set(false);
       },
       error: (error) => {
         console.error('Ошибка при отправке заказа:', error);
-        alert('Произошла ошибка при оформлении заказа');
+        alert('Произошла ошибка при оформлении заказа. Попробуйте снова.');
         this.isSubmitting.set(false);
       },
     });
