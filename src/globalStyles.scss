@@ -3,6 +3,18 @@
 @forward "./styles/_colors";
 @forward "./styles/_reset";
 
+@font-face {
+  font-family: 'Muller Regular';
+  src: url('/src/assets/fonts/Muller-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'Muller Regular', sans-serif;
+}
+
 :root {
   --modal-vertical-spacing: 12px;
   --modal-horizontal-spacing: 12px;

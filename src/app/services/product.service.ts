@@ -16,7 +16,7 @@ export class ProductService {}
 export class ProductsService {
   private http = inject(HttpClient);
 
-  private readonly dataUrl = 'assets/data/products.json';
+  private readonly dataUrl = 'assets/data/pizza-products.json';
   private readonly requestDelay = 500;
 
   getProducts(): Observable<IProduct[]> {

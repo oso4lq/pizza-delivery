@@ -5,7 +5,7 @@
     "price": 450,
     "name": "Мясная Делюкс",
     "description": "Пепперони, лук, бекон, томатная паста, колбаски, моцарелла, грибы, соус",
-    "imageUrl": "assets/imgs/pizza-meat-deluxe.jpg"
+    "imageUrl": "assets/imgs/pizza_001_meatdlx.png"
   },
   {
     "ID": "pizza-002",
@@ -13,7 +13,7 @@
     "price": 380,
     "name": "Морская Премиум",
     "description": "Перец, сыр, креветки, кальмары, мидии, лосось",
-    "imageUrl": "assets/imgs/pizza-seafood.jpg"
+    "imageUrl": "assets/imgs/pizza_002_seaprem.png"
   },
   {
     "ID": "pizza-003",
@@ -21,7 +21,7 @@
     "price": 420,
     "name": "Бекон и Сосиски",
     "description": "Бекон, сыр, сосиски, ананас, томатная паста",
-    "imageUrl": "assets/imgs/pizza-bacon-sausage.jpg"
+    "imageUrl": "assets/imgs/pizza_003_bcnssgs.png"
   },
   {
     "ID": "pizza-004",
@@ -29,7 +29,7 @@
     "price": 395,
     "name": "Куриная Делюкс",
     "description": "Курица, ананас, сыр Пепперони, соус, для пиццы, томатная паста",
-    "imageUrl": "assets/imgs/pizza-chicken.jpg"
+    "imageUrl": "assets/imgs/pizza_004_chickdlx.png"
   },
   {
     "ID": "pizza-005",
@@ -37,7 +37,7 @@
     "price": 410,
     "name": "Барбекю Премиум",
     "description": "Свинина BBQ, соус Барбекю, сыр, грудинка, соус для пиццы, соус чили",
-    "imageUrl": "assets/imgs/pizza-bbq.jpg"
+    "imageUrl": "assets/imgs/pizza_005_bbqprem.png"
   },
   {
     "ID": "pizza-006",
@@ -45,7 +45,7 @@
     "price": 365,
     "name": "Пепперони Дабл",
     "description": "Пепперони, сыр, колбаса 2 видов, обваленные в вареном",
-    "imageUrl": "assets/imgs/pizza-pepperoni.jpg"
+    "imageUrl": "assets/imgs/pizza_006_pprndbl.png"
   },
   {
     "ID": "pizza-007",
@@ -53,7 +53,7 @@
     "price": 430,
     "name": "Куриное трио",
     "description": "Жареная курица, Грудинка куриная, Куриное филе, ребра, сыр, Куриная оатасса, перец, лук",
-    "imageUrl": "assets/imgs/pizza-chicken-trio.jpg"
+    "imageUrl": "assets/imgs/pizza_007_chicktrio.png"
   },
   {
     "ID": "pizza-008",
@@ -61,6 +61,6 @@
     "price": 340,
     "name": "Сырная",
     "description": "Сыр Джюгас, Сыр с плесенью, Сыр Моцарелла, Сыр сливочный",
-    "imageUrl": "assets/imgs/pizza-cheese.jpg"
+    "imageUrl": "assets/imgs/pizza_008_cheese.png"
   }
 ]
