@@ -2,8 +2,9 @@
 
 <header class="header">
   <div class="header__container">
+    <!-- Логотип -->
     <div class="header__logo">
-      <a [routerLink]="['/', PageRoute.Main]">
+      <a [routerLink]="['/', PageRoute.Main]" class="header__logo-link">
         <img
           src="assets/images/logo.png"
           alt="Pizza Cheff"
@@ -12,8 +13,10 @@
       </a>
     </div>
 
+    <!-- Навигация -->
     <nav class="header__nav">
       @for (link of navLinks; track link.path) {
+
       <a
         [routerLink]="['/', link.path]"
         routerLinkActive="header__nav-link--active"

@@ -1,1 +1,24 @@
 <!-- main-page.component.html -->
+
+<div class="main-page">
+  <!-- Hero секция -->
+  <section class="main-page__hero">
+    <app-hero />
+  </section>
+
+  <!-- Секция с продуктами -->
+  <section class="main-page__products">
+    <h2 class="main-page__section-title">Выберите свою любимую пиццу</h2>
+
+    @if (isLoading()) {
+    <div class="main-page__loading">Загрузка...</div>
+    } @else {
+    <app-product-grid [products]="products()" />
+    }
+  </section>
+
+  <!-- Секция с формой заказа -->
+  <section class="main-page__order">
+    <app-order-form />
+  </section>
+</div>

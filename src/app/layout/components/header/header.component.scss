@@ -1,3 +1,122 @@
 // header.component.scss
 
 @use "globalStyles.scss" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--theme-background-bg-main);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+  }
+
+  &__logo {
+    flex-shrink: 0;
+
+    &-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    &-image {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__nav-link {
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--theme-text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--theme-text-secondary);
+    }
+
+    &--active {
+      color: var(--theme-text-secondary);
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 3px;
+        background-color: var(--theme-text-secondary);
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+// Адаптивность для планшетов
+@media (max-width: 900px) {
+  .header {
+    &__container {
+      height: 70px;
+      padding: 0 16px;
+    }
+
+    &__logo-image {
+      height: 45px;
+    }
+
+    &__nav {
+      gap: 24px;
+    }
+
+    &__nav-link {
+      font-size: 15px;
+    }
+  }
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 600px) {
+  .header {
+    &__container {
+      height: 60px;
+      padding: 0 12px;
+    }
+
+    &__logo-image {
+      height: 40px;
+    }
+
+    &__nav {
+      gap: 16px;
+    }
+
+    &__nav-link {
+      font-size: 14px;
+
+      &--active::after {
+        bottom: -6px;
+        height: 2px;
+      }
+    }
+  }
+}

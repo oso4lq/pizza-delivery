@@ -1,8 +1,8 @@
 // product.service.ts
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, delay } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { delay, Observable } from 'rxjs';
 import { IProduct } from '../models/product.model';
 
 @Injectable({
@@ -14,10 +14,10 @@ export class ProductService {}
   providedIn: 'root',
 })
 export class ProductsService {
-  private readonly dataUrl = 'assets/data/products.json';
-  private readonly requestDelay = 500; // Имитация задержки сети
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
+  private readonly dataUrl = 'assets/data/products.json';
+  private readonly requestDelay = 500;
 
   getProducts(): Observable<IProduct[]> {
     return this.http

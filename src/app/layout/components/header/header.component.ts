@@ -4,6 +4,11 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { PageRoute } from '../../../app.routes';
 
+interface NavLink {
+  path: PageRoute;
+  label: string;
+}
+
 @Component({
   selector: 'app-header',
   imports: [RouterLink, RouterLinkActive],
@@ -11,9 +16,9 @@ import { PageRoute } from '../../../app.routes';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  readonly PageRoute = PageRoute;
+  protected readonly PageRoute = PageRoute;
 
-  navLinks = [
+  protected readonly navLinks: NavLink[] = [
     { path: PageRoute.Main, label: 'Пиццы' },
     { path: PageRoute.Drinks, label: 'Напитки' },
     { path: PageRoute.Delivery, label: 'Доставка и оплата' },

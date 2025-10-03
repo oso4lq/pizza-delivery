@@ -1,0 +1,134 @@
+// product-card.component.scss
+
+@use "globalStyles.scss" as *;
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--theme-white-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+  }
+
+  &__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    background-color: var(--theme-background-bg-main);
+    overflow: hidden;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    background-color: #f8f8f8;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--theme-text-description);
+    margin: 0;
+  }
+
+  &__description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--theme-text-service);
+    margin: 0;
+    flex: 1;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    gap: 12px;
+  }
+
+  &__price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--theme-text-secondary);
+  }
+
+  &__button {
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--theme-white-color);
+    background-color: var(--theme-button-btn-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: var(--theme-text-primary);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 600px) {
+  .product-card {
+    &__content {
+      padding: 16px;
+      gap: 10px;
+    }
+
+    &__title {
+      font-size: 16px;
+    }
+
+    &__description {
+      font-size: 13px;
+    }
+
+    &__price {
+      font-size: 18px;
+    }
+
+    &__button {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+  }
+}

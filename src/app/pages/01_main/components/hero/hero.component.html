@@ -1,0 +1,36 @@
+<!-- hero.component.html -->
+
+<div class="hero">
+  <div class="hero__content">
+    <div class="hero__text">
+      <h1 class="hero__title">
+        Самая вкусная пицца в мире<br />
+        только в <span class="hero__brand">Pizza Cheff</span>
+      </h1>
+
+      <div class="hero__features">
+        @for (feature of features; track feature.title) {
+        <div class="hero__feature">
+          <span class="hero__feature-icon">{{ feature.icon }}</span>
+          <div class="hero__feature-content">
+            <h3 class="hero__feature-title">{{ feature.title }}</h3>
+            <p class="hero__feature-description">{{ feature.description }}</p>
+          </div>
+        </div>
+        }
+      </div>
+
+      <button type="button" class="hero__button" (click)="scrollToProducts()">
+        Выбрать пиццу
+      </button>
+    </div>
+
+    <div class="hero__image">
+      <img
+        src="assets/images/hero-pizza.png"
+        alt="Пицца Pizza Cheff"
+        class="hero__image-pic"
+      />
+    </div>
+  </div>
+</div>

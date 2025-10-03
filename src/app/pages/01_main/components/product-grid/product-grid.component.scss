@@ -1,0 +1,64 @@
+// product-grid.component.scss
+
+@use "globalStyles.scss" as *;
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+
+  &__item {
+    grid-column: span 3;
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+
+    p {
+      font-size: 18px;
+      color: var(--theme-text-service);
+      margin: 0;
+    }
+  }
+}
+
+// Адаптивность для планшетов (900px - 1200px)
+@media (max-width: 1200px) and (min-width: 901px) {
+  .product-grid {
+    &__item {
+      grid-column: span 4;
+    }
+  }
+}
+
+// Адаптивность для планшетов (600px - 900px)
+@media (max-width: 900px) and (min-width: 601px) {
+  .product-grid {
+    gap: 16px;
+
+    &__item {
+      grid-column: span 6;
+    }
+  }
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 600px) {
+  .product-grid {
+    gap: 12px;
+
+    &__item {
+      grid-column: 1 / -1;
+    }
+
+    &__empty {
+      padding: 40px 16px;
+
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
