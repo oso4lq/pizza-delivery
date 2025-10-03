@@ -5,8 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh-pages": "ng build --base-href=/pizza-delivery/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "pnpm run build:gh-pages && pnpm run copy-index && gh-pages -d dist/pizza-delivery/browser",
+    "copy-index": "cp dist/pizza-delivery/browser/index.html dist/pizza-delivery/browser/404.html"
   },
   "prettier": {
     "overrides": [
