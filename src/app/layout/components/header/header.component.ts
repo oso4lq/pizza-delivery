@@ -1,6 +1,6 @@
 // header.component.ts
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { PageRoute } from '../../../app.routes';
 import { CartService } from '../../../services/cart.service';
@@ -21,9 +21,10 @@ export class HeaderComponent {
   private cartService = inject(CartService);
 
   protected readonly PageRoute = PageRoute;
-
-  // Публичный доступ к количеству товаров в корзине
   protected readonly cartTotalCount = this.cartService.totalCount;
+
+  // Состояние мобильного меню
+  protected isMenuOpen = signal(false);
 
   protected readonly navLinks: NavLink[] = [
     { path: PageRoute.Main, label: 'Пиццы' },
@@ -31,4 +32,12 @@ export class HeaderComponent {
     { path: PageRoute.Delivery, label: 'Доставка и оплата' },
     { path: PageRoute.Contacts, label: 'Контакты' },
   ];
+
+  protected toggleMenu(): void {
+    this.isMenuOpen.update((state) => !state);
+  }
+
+  protected closeMenu(): void {
+    this.isMenuOpen.set(false);
+  }
 }

@@ -69,8 +69,14 @@
 }
 
 @media (max-width: 900px) {
+  :host {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
   .text {
-    grid-column: 1 / 8;
+    grid-column: 1 / -1;
+    order: 1;
     gap: $spacing-md;
   }
 
@@ -80,13 +86,21 @@
   }
 
   .image {
-    grid-column: 8 / -1;
+    display: none;
+  }
+
+  button {
+    width: 100%;
+    align-self: center;
   }
 }
 
 @media (max-width: 600px) {
+  :host {
+    gap: $spacing-sm;
+  }
+
   .text {
-    grid-column: 1 / -1;
     gap: $spacing-sm;
   }
 
@@ -98,14 +112,12 @@
     gap: $spacing-sm;
 
     &__block {
-      grid-template-columns: 1fr;
       gap: $spacing-sm;
     }
   }
 
   .image {
-    grid-column: 1 / -1;
-    margin-top: $spacing-lg;
+    margin-top: $spacing-md;
 
     img {
       max-width: 400px;

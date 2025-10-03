@@ -9,8 +9,23 @@
     <span class="header__text">Pizza<br />Cheff</span>
   </div>
 
+  <!-- Кнопка бургер-меню (только на мобильных) -->
+  @if(!isMenuOpen()){
+  <button type="button" class="burger" (click)="toggleMenu()" aria-label="Меню">
+    <span>Меню</span>
+    <span class="burger__icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+  }
+
   <!-- Навигация -->
-  <nav class="flex-grow flex-row center-all header__nav">
+  <nav
+    class="flex-grow flex-row center-all header__nav"
+    [class.open]="isMenuOpen()"
+  >
     @for (link of navLinks; track link.path) {
 
     <!-- Кнопки -->
@@ -26,7 +41,14 @@
     <!-- Корзина -->
     <div class="flex-row center-all cart">
       <span class="flex-row center-row cart__label">Корзина:</span>
-      <span class="flex-row center-all cart__count">{{ cartTotalCount() }}</span>
+      <span class="flex-row center-all cart__count">{{
+        cartTotalCount()
+      }}</span>
     </div>
   </nav>
 </header>
+
+<!-- Оверлей для закрытия меню при клике вне его -->
+@if(isMenuOpen()) {
+<div class="overlay" (click)="closeMenu()"></div>
+}
