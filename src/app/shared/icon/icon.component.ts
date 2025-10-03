@@ -4,16 +4,12 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   input,
   output,
   signal,
 } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
 import { ColorKey, COLORS } from '../types';
-import { IconName } from './icon-names-data';
-import { SvgSpriteService } from './svg-sprite.service';
-export * from './icon-names-data';
 
 /**  -----------------------------------
  * Все иконки могут иметь возможность окрашивания.
@@ -96,8 +92,6 @@ export * from './icon-names-data';
   ],
 })
 export class IconComponent {
-  private spriteSrv = inject(SvgSpriteService);
-  private sanitizer = inject(DomSanitizer);
 
   readonly defaultIconSize: number | string = 16;
 
@@ -144,28 +138,28 @@ export class IconComponent {
   // Список хранится в ./icon-names-data.ts
 
   // Входной сигнал для имени иконки (IconName)
-  name = input(undefined, {
-    transform: (name?: IconName) => {
-      if (!name) {
-        this.icon.set(null);
-        return name;
-      }
-      this.isIcon.set(true);
+  // name = input(undefined, {
+  //   transform: (name?: IconName) => {
+  //     if (!name) {
+  //       this.icon.set(null);
+  //       return name;
+  //     }
+  //     this.isIcon.set(true);
 
-      const symbol = this.spriteSrv.getSymbol(name);
-      if (!symbol) {
-        console.error('Core', `Invalid icon name: ${name}`);
-        return;
-      }
-      const vb = symbol.getAttribute('viewBox');
-      this.viewBox.set(vb ? vb : `0 0 ${this.$width()} ${this.$height()}`);
-      this.symbolContent.set(
-        this.sanitizer.bypassSecurityTrustHtml(symbol.innerHTML)
-      );
+  //     const symbol = this.spriteSrv.getSymbol(name);
+  //     if (!symbol) {
+  //       console.error('Core', `Invalid icon name: ${name}`);
+  //       return;
+  //     }
+  //     const vb = symbol.getAttribute('viewBox');
+  //     this.viewBox.set(vb ? vb : `0 0 ${this.$width()} ${this.$height()}`);
+  //     this.symbolContent.set(
+  //       this.sanitizer.bypassSecurityTrustHtml(symbol.innerHTML)
+  //     );
 
-      return name;
-    },
-  });
+  //     return name;
+  //   },
+  // });
 
   // Входной сигнал для ссылки на иконку или прямого URL
   src = input(undefined, {
@@ -186,18 +180,18 @@ export class IconComponent {
         this.isIcon.set(false);
         this.icon.set(src);
       } else {
-        // Это имя иконки из спрайта
-        this.isIcon.set(true);
-        const symbol = this.spriteSrv.getSymbol(src);
-        if (!symbol) {
-          console.error('Core', `Invalid icon name: ${src}`);
-          return;
-        }
-        const vb = symbol.getAttribute('viewBox');
-        this.viewBox.set(vb ? vb : `0 0 ${this.$width()} ${this.$height()}`);
-        this.symbolContent.set(
-          this.sanitizer.bypassSecurityTrustHtml(symbol.innerHTML)
-        );
+        // // Это имя иконки из спрайта
+        // this.isIcon.set(true);
+        // const symbol = this.spriteSrv.getSymbol(src);
+        // if (!symbol) {
+        //   console.error('Core', `Invalid icon name: ${src}`);
+        //   return;
+        // }
+        // const vb = symbol.getAttribute('viewBox');
+        // this.viewBox.set(vb ? vb : `0 0 ${this.$width()} ${this.$height()}`);
+        // this.symbolContent.set(
+        //   this.sanitizer.bypassSecurityTrustHtml(symbol.innerHTML)
+        // );
       }
       return src;
     },

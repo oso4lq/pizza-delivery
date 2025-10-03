@@ -5,6 +5,9 @@ import { IGalleryConfig } from './shared/gallery/gallery.component';
 
 @Injectable({ providedIn: 'root' })
 export class AppController {
+  constructor() {
+    AppController.shared = this;
+  }
 
   static shared: AppController; // <- Singleton Instance
 

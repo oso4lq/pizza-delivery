@@ -1,6 +1,6 @@
 <!-- product-card.component.html -->
 
-<div class="image-wrapper">
+<div class="image-wrapper" (click)="openImage()">
   <img
     [src]="product().imageUrl"
     [alt]="product().name"

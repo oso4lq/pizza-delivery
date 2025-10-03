@@ -24,8 +24,20 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
+
   --modal-vertical-spacing: 12px;
   --modal-horizontal-spacing: 12px;
+
+  // Поддержка dvh для современных браузеров
+  --dvw: 1vw; // fallback для старых браузеров
+  --dvh: 1vh; // fallback для старых браузеров
+
+  @supports (width: 100dvw) {
+    --dvw: 1dvw; // используем dvw если поддерживается
+  }
+  @supports (height: 100dvh) {
+    --dvh: 1dvh; // используем dvh если поддерживается
+  }
 }
 
 /// Полная ширина экрана с учётом dynamic view width или view width
@@ -71,7 +83,7 @@ $btn-color: #ffaf18;
 $border-input: #b99150;
 
 // =============/BOX SHADOWS\=============
-$shadow-normal: 0 12px 32px rgba(0,0,0,0.1);
+$shadow-normal: 0 12px 32px rgba(0, 0, 0, 0.1);
 $state-item-hover: "rgba(255,255,255,0.06)";
 
 // ==========================================

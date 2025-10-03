@@ -1,3 +1,7 @@
 <!-- app.component.html -->
 
 <app-layout />
+
+@if( gallery(); as gallery ){
+  <app-gallery [config]="gallery" />
+}

@@ -8,6 +8,10 @@ import {
 } from '@angular/core';
 import { IProduct } from '../../../../models/product.model';
 import { ButtonComponent } from '../../../../shared/button/button.component';
+import {
+  GalleryComponent,
+  IGalleryConfig,
+} from '../../../../shared/gallery/gallery.component';
 
 @Component({
   selector: 'app-product-card',
@@ -23,5 +27,26 @@ export class ProductCardComponent {
 
   protected onAddToCart(): void {
     this.addToCart.emit(this.product());
+  }
+
+  // Открытие изображения в галерее
+  protected openImage(): void {
+    const product = this.product();
+
+    if (!product.imageUrl) return;
+
+    const config: IGalleryConfig = {
+      images: [
+        {
+          ID: product.ID,
+          url: product.imageUrl,
+          name: product.name,
+          description: product.description,
+        },
+      ],
+      startIndex: 0,
+    };
+
+    GalleryComponent.show(config);
   }
 }
