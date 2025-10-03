@@ -26,12 +26,12 @@
     font-size: 40px;
     font-weight: 700;
     line-height: 1.2;
-    color: var(--theme-text-primary);
+    color: $text-primary;
     margin: 0;
   }
 
   &__brand {
-    color: var(--theme-text-secondary);
+    color: $text-secondary;
   }
 
   &__features {
@@ -61,14 +61,14 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 1.4;
-    color: var(--theme-text-secondary);
+    color: $text-secondary;
     margin: 0;
   }
 
   &__feature-description {
     font-size: 13px;
     line-height: 1.4;
-    color: var(--theme-text-description);
+    color: $text-description;
     margin: 0;
   }
 
@@ -77,8 +77,8 @@
     padding: 16px 40px;
     font-size: 16px;
     font-weight: 600;
-    color: var(--theme-white-color);
-    background-color: var(--theme-button-btn-color);
+    color: $white-color;
+    background-color: $btn-color;
     border: none;
     border-radius: 8px;
     cursor: pointer;

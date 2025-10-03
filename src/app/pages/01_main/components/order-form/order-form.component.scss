@@ -26,14 +26,14 @@
     font-size: 32px;
     font-weight: 700;
     line-height: 1.2;
-    color: var(--theme-text-primary);
+    color: $text-primary;
     margin: 0;
   }
 
   &__description {
     font-size: 14px;
     line-height: 1.6;
-    color: var(--theme-text-description);
+    color: $text-description;
     margin: 0;
   }
 
@@ -47,24 +47,24 @@
   &__input {
     padding: 16px 20px;
     font-size: 15px;
-    color: var(--theme-text-description);
-    background-color: var(--theme-white-color);
-    border: 1px solid var(--theme-border-border-input);
+    color: $text-description;
+    background-color: $white-color;
+    border: 1px solid $text-primary;
     border-radius: 8px;
     outline: none;
     transition: all 0.2s ease;
 
     &::placeholder {
-      color: var(--theme-text-service);
+      color: $text-service;
     }
 
     &:focus {
-      border-color: var(--theme-text-secondary);
+      border-color: $text-secondary;
       box-shadow: 0 0 0 3px rgba(255, 175, 24, 0.1);
     }
 
     &:hover {
-      border-color: var(--theme-text-primary);
+      border-color: $text-primary;
     }
   }
 
@@ -72,8 +72,8 @@
     padding: 16px 32px;
     font-size: 16px;
     font-weight: 600;
-    color: var(--theme-white-color);
-    background-color: var(--theme-button-btn-color);
+    color: $white-color;
+    background-color: $btn-color;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -81,7 +81,7 @@
     margin-top: 8px;
 
     &:hover:not(:disabled) {
-      background-color: var(--theme-text-primary);
+      background-color: $text-primary;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(255, 175, 24, 0.3);
     }

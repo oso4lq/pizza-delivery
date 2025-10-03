@@ -5,7 +5,7 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  background-color: var(--theme-white-color);
+  background-color: $white-color;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -20,7 +20,7 @@
     position: relative;
     width: 100%;
     padding-top: 100%;
-    background-color: var(--theme-background-bg-main);
+    background-color: $bg-main;
     overflow: hidden;
   }
 
@@ -43,7 +43,7 @@
     align-items: center;
     justify-content: center;
     font-size: 64px;
-    background-color: #f8f8f8;
+    // background-color: #f8f8f8;
   }
 
   &__content {
@@ -58,14 +58,14 @@
     font-size: 18px;
     font-weight: 700;
     line-height: 1.3;
-    color: var(--theme-text-description);
+    color: $text-description;
     margin: 0;
   }
 
   &__description {
     font-size: 14px;
     line-height: 1.5;
-    color: var(--theme-text-service);
+    color: $text-service;
     margin: 0;
     flex: 1;
   }
@@ -81,15 +81,15 @@
   &__price {
     font-size: 20px;
     font-weight: 700;
-    color: var(--theme-text-secondary);
+    color: $text-secondary;
   }
 
   &__button {
     padding: 12px 24px;
     font-size: 14px;
     font-weight: 600;
-    color: var(--theme-white-color);
-    background-color: var(--theme-button-btn-color);
+    color: $white-color;
+    background-color: $btn-color;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -97,7 +97,7 @@
     white-space: nowrap;
 
     &:hover {
-      background-color: var(--theme-text-primary);
+      background-color: $text-primary;
     }
 
     &:active {
