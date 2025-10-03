@@ -23,9 +23,9 @@
   }
 
   &__title {
-    font-size: 40px;
-    font-weight: 700;
-    line-height: 1.2;
+    // font-size: 40px;
+    // font-weight: 700;
+    // line-height: 1.2;
     color: $text-primary;
     margin: 0;
   }
@@ -47,7 +47,7 @@
   }
 
   &__feature-icon {
-    font-size: 32px;
+    // font-size: 32px;
     flex-shrink: 0;
   }
 
@@ -58,41 +58,41 @@
   }
 
   &__feature-title {
-    font-size: 14px;
+    // font-size: 14px;
     font-weight: 700;
-    line-height: 1.4;
+    // line-height: 1.4;
     color: $text-secondary;
     margin: 0;
   }
 
   &__feature-description {
-    font-size: 13px;
-    line-height: 1.4;
-    color: $text-description;
+    // font-size: 13px;
+    // line-height: 1.4;
+    // color: $text-description;
     margin: 0;
   }
 
-  &__button {
-    width: fit-content;
-    padding: 16px 40px;
-    font-size: 16px;
-    font-weight: 600;
-    color: $white-color;
-    background-color: $btn-color;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+//   &__button {
+//     width: fit-content;
+//     padding: 16px 40px;
+//     font-size: 16px;
+//     font-weight: 600;
+//     color: $white-color;
+//     background-color: $btn-color;
+//     border: none;
+//     border-radius: 8px;
+//     cursor: pointer;
+//     transition: all 0.2s ease;
 
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 175, 24, 0.3);
-    }
+//     &:hover {
+//       transform: translateY(-2px);
+//       box-shadow: 0 4px 12px rgba(255, 175, 24, 0.3);
+//     }
 
-    &:active {
-      transform: translateY(0);
-    }
-  }
+//     &:active {
+//       transform: translateY(0);
+//     }
+//   }
 
   &__image {
     grid-column: 7 / -1;
@@ -121,30 +121,30 @@
       gap: 24px;
     }
 
-    &__title {
-      font-size: 32px;
-    }
+    // &__title {
+    //   font-size: 32px;
+    // }
 
     &__features {
       grid-template-columns: 1fr;
       gap: 16px;
     }
 
-    &__feature-icon {
-      font-size: 28px;
-    }
+    // &__feature-icon {
+    //   font-size: 28px;
+    // }
 
-    &__feature-title {
-      font-size: 13px;
-    }
+    // &__feature-title {
+    //   font-size: 13px;
+    // }
 
-    &__feature-description {
-      font-size: 12px;
-    }
+    // &__feature-description {
+    //   font-size: 12px;
+    // }
 
     &__button {
       padding: 14px 32px;
-      font-size: 15px;
+    //   font-size: 15px;
     }
 
     &__image {
@@ -166,7 +166,7 @@
     }
 
     &__title {
-      font-size: 26px;
+    //   font-size: 26px;
       text-align: center;
     }
 
@@ -179,14 +179,14 @@
       gap: 8px;
     }
 
-    &__feature-icon {
-      font-size: 24px;
-    }
+    // &__feature-icon {
+    //   font-size: 24px;
+    // }
 
     &__button {
       width: 100%;
       padding: 14px 24px;
-      font-size: 15px;
+    //   font-size: 15px;
     }
 
     &__image {

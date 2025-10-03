@@ -11,9 +11,10 @@
       <div class="hero__features">
         @for (feature of features; track feature.title) {
         <div class="hero__feature">
-          <span class="hero__feature-icon">{{ feature.icon }}</span>
+          <app-icon [src]="feature.icon" [size]="60" />
+          <!-- <span class="hero__feature-icon">{{  }}</span> -->
           <div class="hero__feature-content">
-            <h3 class="hero__feature-title">{{ feature.title }}</h3>
+            <h6 class="hero__feature-title">{{ feature.title }}</h6>
             <p class="hero__feature-description">{{ feature.description }}</p>
           </div>
         </div>

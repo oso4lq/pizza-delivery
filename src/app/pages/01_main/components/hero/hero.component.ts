@@ -1,6 +1,7 @@
 // hero.component.ts
 
 import { Component } from '@angular/core';
+import { IconComponent } from '../../../../shared/icon/icon.component';
 
 interface HeroFeature {
   icon: string;
@@ -10,34 +11,34 @@ interface HeroFeature {
 
 @Component({
   selector: 'app-hero',
-  imports: [],
+  imports: [IconComponent],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent {
   protected readonly features: HeroFeature[] = [
     {
-      icon: '🍕',
+      icon: 'assets/imgs/ic_hop.png',
       title: 'ЛУЧШЕЕ ТЕСТО',
       description:
-        'Мы создаём тесто только из отборной итальянской муки наивысшего качества',
+        'Мы создаем тесто только из отборной итальянской муки наивысшего качества',
     },
     {
-      icon: '👨‍🍳',
+      icon: 'assets/imgs/ic_chefs.png',
       title: 'ЛУЧШИЕ ПОВАРА',
       description: 'Пиццы готовят самые профессиональные итальянские повара',
     },
     {
-      icon: '✓',
+      icon: 'assets/imgs/ic_quality.png',
       title: 'ГАРАНТИЯ КАЧЕСТВА',
       description:
         'Наша пиццерия получила множество наград и признаний по всему миру',
     },
     {
-      icon: '📋',
+      icon: 'assets/imgs/ic_recipes.png',
       title: 'ОТБОРНЫЕ РЕЦЕПТЫ',
       description:
-        'Мы используем рецепты от мировых лидеров в итальянской пицце',
+        'Мы используем рецепты от мировых лидеров в изготовлении пиццы',
     },
   ];
 

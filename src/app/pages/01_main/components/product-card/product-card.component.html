@@ -1,28 +1,22 @@
 <!-- product-card.component.html -->
 
-<div class="product-card">
+<div class="flex-col product-card">
   <div class="product-card__image-wrapper">
-    @if (product().imageUrl) {
     <img
       [src]="product().imageUrl"
       [alt]="product().name"
-      class="product-card__image"
+      class="w-h-100 product-card__image"
       loading="lazy"
     />
-    } @else {
-    <div class="product-card__image-placeholder">
-      <span>🍕</span>
-    </div>
-    }
   </div>
 
   <div class="product-card__content">
-    <h3 class="product-card__title">{{ product().name }}</h3>
+    <h5 class="product-card__title">{{ product().name }}</h5>
 
     <p class="product-card__description">{{ product().description }}</p>
 
     <div class="product-card__footer">
-      <span class="product-card__price">{{ product().price }} ₽</span>
+      <!-- <span class="product-card__price">{{ product().price }} ₽</span> -->
 
       <button
         type="button"

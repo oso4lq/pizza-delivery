@@ -39,28 +39,30 @@
     }
   }
 
+  &__text {
+    color: $text-header;
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
   &__nav {
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
     gap: 40px;
   }
 
   &__nav-link {
     position: relative;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--theme-text-primary);
+    color: $text-link;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
 
     &:hover {
-      color: var(--theme-text-secondary);
+      color: $text-primary;
     }
 
-    &--active {
-      color: var(--theme-text-secondary);
-
+    &_active {
       &::after {
         content: "";
         position: absolute;
@@ -68,7 +70,7 @@
         right: 0;
         bottom: -8px;
         height: 3px;
-        background-color: var(--theme-text-secondary);
+        background-color: $text-secondary;
         border-radius: 2px;
       }
     }

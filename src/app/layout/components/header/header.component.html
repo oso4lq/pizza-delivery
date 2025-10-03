@@ -7,16 +7,16 @@
       <a [routerLink]="['/', PageRoute.Main]" class="header__logo-link">
         <app-icon src="assets/imgs/logo.png" [size]="68" />
       </a>
-      <span>Pizza Cheff</span>
+      <span class="header__text">Pizza<br>Cheff</span>
     </div>
 
     <!-- Навигация -->
-    <nav class="header__nav">
+    <nav class="flex-grow flex-row center-all header__nav">
       @for (link of navLinks; track link.path) {
 
       <a
         [routerLink]="['/', link.path]"
-        routerLinkActive="header__nav-link--active"
+        routerLinkActive="header__nav-link_active"
         class="header__nav-link"
       >
         {{ link.label }}

@@ -23,15 +23,15 @@
   }
 
   &__title {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: $text-primary;
+    // font-size: 32px;
+    // font-weight: 700;
+    // line-height: 1.2;
+    // color: $text-primary;
     margin: 0;
   }
 
   &__description {
-    font-size: 14px;
+    // font-size: 14px;
     line-height: 1.6;
     color: $text-description;
     margin: 0;
@@ -46,7 +46,7 @@
 
   &__input {
     padding: 16px 20px;
-    font-size: 15px;
+    // font-size: 15px;
     color: $text-description;
     background-color: $white-color;
     border: 1px solid $text-primary;
@@ -68,33 +68,33 @@
     }
   }
 
-  &__button {
-    padding: 16px 32px;
-    font-size: 16px;
-    font-weight: 600;
-    color: $white-color;
-    background-color: $btn-color;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 8px;
+//   &__button {
+//     padding: 16px 32px;
+//     font-size: 16px;
+//     font-weight: 600;
+//     color: $white-color;
+//     background-color: $btn-color;
+//     border: none;
+//     border-radius: 8px;
+//     cursor: pointer;
+//     transition: all 0.2s ease;
+//     margin-top: 8px;
 
-    &:hover:not(:disabled) {
-      background-color: $text-primary;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 175, 24, 0.3);
-    }
+//     &:hover:not(:disabled) {
+//       background-color: $text-primary;
+//       transform: translateY(-2px);
+//       box-shadow: 0 4px 12px rgba(255, 175, 24, 0.3);
+//     }
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
+//     &:active:not(:disabled) {
+//       transform: translateY(0);
+//     }
 
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
+//     &:disabled {
+//       opacity: 0.6;
+//       cursor: not-allowed;
+//     }
+//   }
 
   &__image {
     grid-column: 9 / -1;
@@ -123,13 +123,13 @@
       gap: 16px;
     }
 
-    &__title {
-      font-size: 28px;
-    }
+    // &__title {
+    //   font-size: 28px;
+    // }
 
-    &__description {
-      font-size: 13px;
-    }
+    // &__description {
+    //   font-size: 13px;
+    // }
 
     &__form {
       grid-column: 6 / -1;
@@ -138,12 +138,12 @@
 
     &__input {
       padding: 14px 18px;
-      font-size: 14px;
+    //   font-size: 14px;
     }
 
     &__button {
       padding: 14px 28px;
-      font-size: 15px;
+    //   font-size: 15px;
     }
 
     &__image {
@@ -170,12 +170,12 @@
     }
 
     &__title {
-      font-size: 24px;
+    //   font-size: 24px;
       text-align: center;
     }
 
     &__description {
-      font-size: 13px;
+    //   font-size: 13px;
       text-align: center;
     }
 
@@ -186,12 +186,12 @@
 
     &__input {
       padding: 14px 16px;
-      font-size: 14px;
+    //   font-size: 14px;
     }
 
     &__button {
       padding: 14px 24px;
-      font-size: 15px;
+    //   font-size: 15px;
       margin-top: 4px;
     }
 

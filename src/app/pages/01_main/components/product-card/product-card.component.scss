@@ -2,49 +2,48 @@
 
 @use "globalStyles.scss" as *;
 
+:host {
+  box-shadow: $menu-shadow;
+}
+
 .product-card {
-  display: flex;
-  flex-direction: column;
-  background-color: $white-color;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  //   display: flex;
+  //   flex-direction: column;
+  //   background-color: $white-color;
+  //   border-radius: 12px;
+  //   overflow: hidden;
+  //   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: $menu-shadow;
   transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    // box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     transform: translateY(-4px);
   }
 
   &__image-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 100%;
-    background-color: $bg-main;
-    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    // width: 100%;
+    padding: 12px;
+    // background-color: $bg-main;
+    // overflow: hidden;
   }
 
   &__image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    // width: 100%;
+    // height: 100%;
+    object-fit: contain;
   }
 
-  &__image-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 64px;
-    // background-color: #f8f8f8;
-  }
+//   &__image-placeholder {
+//     width: 100%;
+//     height: 100%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     // font-size: 64px;
+//     // background-color: #f8f8f8;
+//   }
 
   &__content {
     display: flex;
@@ -55,17 +54,20 @@
   }
 
   &__title {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: $text-description;
+    // font-size: 18px;
+    // font-weight: 700;
+    // line-height: 1.3;
+    font-weight: 600;
+    text-align: center;
+    color: $text-service;
     margin: 0;
   }
 
   &__description {
-    font-size: 14px;
-    line-height: 1.5;
-    color: $text-service;
+    // font-size: 14px;
+    // line-height: 1.5;
+    text-align: center;
+    color: $text-description;
     margin: 0;
     flex: 1;
   }
@@ -79,31 +81,31 @@
   }
 
   &__price {
-    font-size: 20px;
+    // font-size: 20px;
     font-weight: 700;
     color: $text-secondary;
   }
 
-  &__button {
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 600;
-    color: $white-color;
-    background-color: $btn-color;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
+  //   &__button {
+  //     padding: 12px 24px;
+  //     // font-size: 14px;
+  //     font-weight: 600;
+  //     color: $white-color;
+  //     background-color: $btn-color;
+  //     border: none;
+  //     border-radius: 8px;
+  //     cursor: pointer;
+  //     transition: all 0.2s ease;
+  //     white-space: nowrap;
 
-    &:hover {
-      background-color: $text-primary;
-    }
+  //     &:hover {
+  //       background-color: $text-primary;
+  //     }
 
-    &:active {
-      transform: scale(0.98);
-    }
-  }
+  //     &:active {
+  //       transform: scale(0.98);
+  //     }
+  //   }
 }
 
 // Адаптивность для мобильных устройств
@@ -114,21 +116,21 @@
       gap: 10px;
     }
 
-    &__title {
-      font-size: 16px;
-    }
+    // &__title {
+    //   font-size: 16px;
+    // }
 
-    &__description {
-      font-size: 13px;
-    }
+    // &__description {
+    //   font-size: 13px;
+    // }
 
-    &__price {
-      font-size: 18px;
-    }
+    // &__price {
+    //   font-size: 18px;
+    // }
 
     &__button {
       padding: 10px 20px;
-      font-size: 13px;
+      //   font-size: 13px;
     }
   }
 }
