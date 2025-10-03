@@ -4,10 +4,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IOrder } from '../../../../models/order.model';
 import { OrderService } from '../../../../services/order.service';
+import { ButtonComponent } from '../../../../shared/button/button.component';
 
 @Component({
   selector: 'app-order-form',
-  imports: [FormsModule],
+  imports: [FormsModule, ButtonComponent],
   templateUrl: './order-form.component.html',
   styleUrl: './order-form.component.scss',
 })

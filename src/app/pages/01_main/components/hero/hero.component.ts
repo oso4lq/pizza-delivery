@@ -2,6 +2,7 @@
 
 import { Component } from '@angular/core';
 import { IconComponent } from '../../../../shared/icon/icon.component';
+import { ButtonComponent } from '../../../../shared/button/button.component';
 
 interface HeroFeature {
   icon: string;
@@ -11,7 +12,7 @@ interface HeroFeature {
 
 @Component({
   selector: 'app-hero',
-  imports: [IconComponent],
+  imports: [IconComponent, ButtonComponent],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })

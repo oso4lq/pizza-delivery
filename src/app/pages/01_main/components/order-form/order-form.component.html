@@ -4,7 +4,8 @@
   <div class="order-form__content">
     <div class="order-form__info">
       <h2 class="order-form__title">
-        Хватит думать!<br />Доставим заказ за 30 минут!
+        <span class="order-form__title_brand">Хватит думать!</span
+        ><br />Доставим заказ за 30 минут!
       </h2>
 
       <p class="order-form__description">
@@ -45,7 +46,9 @@
       />
 
       <button
-        type="submit"
+        app-button
+        color="brand"
+        type="raised"
         class="order-form__button"
         [disabled]="isSubmitting() || !name() || !address() || !phone()"
       >

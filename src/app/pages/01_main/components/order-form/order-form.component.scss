@@ -28,12 +28,16 @@
     // line-height: 1.2;
     // color: $text-primary;
     margin: 0;
+
+    &_brand {
+        color: $text-secondary;
+    }
   }
 
   &__description {
     // font-size: 14px;
-    line-height: 1.6;
-    color: $text-description;
+    // line-height: 1.6;
+    // color: $text-description;
     margin: 0;
   }
 

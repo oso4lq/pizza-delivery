@@ -16,5 +16,6 @@ export const COLORS = {
   'red': '#CE0000',
   'pink': '#F5CCCC',
   'orange': '#FF9000',
+  'brand': '#ffaf18',
 } as const
 export type ColorKey = keyof typeof COLORS;

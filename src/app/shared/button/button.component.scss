@@ -50,18 +50,6 @@ $state-list-item-selected: rgba(91,134,190,0.18);
     }
   }
 
-  // Миксин для task control btns
-  @mixin control-btns() {
-    font-size: 11px;
-    line-height: 16px;
-
-    .content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-  }
 
   // Миксин для stroked-button
   @mixin coloring-stroked-button($color-variable, $border-variable) {
@@ -79,6 +67,10 @@ $state-list-item-selected: rgba(91,134,190,0.18);
   // ОБЩИЙ КЛАСС ДЛЯ raised - кнопки с заполнением фона
   &.app-raised-button {
     // ТЕКСТ, ФОН, КОНТУР
+
+    &.brand {
+      @include coloring-raised-button($black-color, $btn-color, $btn-color);
+    }
 
     &.blue {
       @include coloring-raised-button($white-color, $blue-color, $blue-color);
