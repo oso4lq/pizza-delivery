@@ -13,6 +13,7 @@
   <nav class="flex-grow flex-row center-all header__nav">
     @for (link of navLinks; track link.path) {
 
+    <!-- Кнопки -->
     <a
       [routerLink]="['/', link.path]"
       routerLinkActive="header__navlink_active"
@@ -21,5 +22,11 @@
       {{ link.label }}
     </a>
     }
+
+    <!-- Корзина -->
+    <div class="flex-row center-all cart">
+      <span class="flex-row center-row cart__label">Корзина:</span>
+      <span class="flex-row center-all cart__count">{{ cartTotalCount() }}</span>
+    </div>
   </nav>
 </header>

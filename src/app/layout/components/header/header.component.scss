@@ -66,6 +66,23 @@
   }
 }
 
+.cart {
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  border: 1px solid $text-primary;
+  border-radius: 8px;
+
+  &__count {
+    min-width: $spacing-md;
+    min-height: $spacing-md;
+    padding: 0 $spacing-xs;
+    background-color: $btn-color;
+    color: $text-description;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+}
+
 // Адаптивность для планшетов
 @media (max-width: 900px) {
   .header {

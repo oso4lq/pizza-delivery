@@ -1,6 +1,11 @@
 // product-grid.component.ts
 
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { IProduct } from '../../../../models/product.model';
 import { CartService } from '../../../../services/cart.service';
 import { ProductCardComponent } from '../product-card/product-card.component';
@@ -15,10 +20,11 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 export class ProductGridComponent {
   private cartService = inject(CartService);
 
-  products = input.required<IProduct[]>();
+  public products = input.required<IProduct[]>();
 
   protected onAddToCart(product: IProduct): void {
-    // TODO: Реализовать добавление в корзину через CartService
-    console.log('Добавление в корзину:', product);
+    this.cartService.addItem(product.ID);
+    console.log('Товар добавлен в корзину:', product.name);
+    console.log('Всего товаров в корзине:', this.cartService.totalCount());
   }
 }
