@@ -1,11 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "pnpm run build",
-  "outputDirectory": "dist/pizza-delivery/browser",
   "framework": "angular",
   "installCommand": "pnpm install",
-  "devCommand": "pnpm start",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist/pizza-delivery/browser",
   "rewrites": [
     {
       "source": "/(.*)",
